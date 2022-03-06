@@ -7,7 +7,7 @@
 Andy Lu - 22alu  
 Manay Patel - ManayPatel  
 Muhammad Shah - muhammadshah27  
-Jeffrey Wong -   
+Jeffrey Wong - notjwong  
 
 # Innovative Idea
 
