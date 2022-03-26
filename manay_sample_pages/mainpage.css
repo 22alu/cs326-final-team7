@@ -30,6 +30,27 @@
     font-size: 50px;
 }
 
+.searchHeading{
+    margin-left: 5%;
+    font-size: 50px;
+    margin-top: 3%; 
+}
+
+.courseStarting{
+    margin-left: 9%;
+    margin-top: 1%;
+    font-size: x-large;
+}
+
+.courseCard{
+    margin-left: 8%; 
+    margin-top: 1%;
+}
+
+.courseStars{
+    font-size: 28px;
+}
+
 .bulletPoints{
     margin-left: 15%; 
     font-size: x-large;
@@ -60,5 +81,5 @@
     margin-left: auto; 
     margin-right: auto; 
     font-size: xx-large; 
-    margin-top: 5%;
+    margin-top: 4%;
 }
