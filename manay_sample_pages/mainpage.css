@@ -5,6 +5,12 @@
     padding-bottom: 11px;
 }
 
+.bottomBar {
+    background-color: rgb(32, 32, 32); 
+    color: white;
+    padding-top: 15px; 
+    padding-bottom: 11px;
+}
 .logo{
     font-size: 65px; 
     padding-left: 13%;
