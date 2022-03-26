@@ -15,10 +15,9 @@
 <body>
 
     <div class="container-fluid">
-        <div class="row align-items-center"
-            style="background-color: black; color: white; padding-top: 15px; padding-bottom: 11px;">
-            <div class="col-7" style="padding-left: 100px;">
-                <h1 style="font-size: 65px;">CourseCheck <i class="bi bi-book-half"></i></h1>
+        <div class="row align-items-center topBar">
+            <div class="col-7">
+                <h1 class="logo">CourseCheck <i class="bi bi-book-half"></i></h1>
             </div>
             <div class="col-3 align-items-end">
                 <div class="input-group">
@@ -30,20 +29,20 @@
                 </div>
             </div>
             <div class="col-2">
-                <button type="button" class="btn btn-secondary btn-md rounded-2"
-                    style="margin-left: 20px;">LOGIN</button>
+                <button type="button" class="btn btn-secondary btn-md rounded-2 loginBtn">LOGIN</button>
                 <!-- Following HTML line is an example of when a user has logged in: -->
-                <i class="bi bi-file-person float-end" style="font-size: 22px; padding-right: 10px;"> UserName</i>
+                <i class="bi bi-file-person float-end userNameLogo"> UserName</i>
             </div>
         </div>
-        <div class="row" style="margin-top: 2%;">
-            <div class="col-5" style="margin-left: 3%; font-size: 50px;">
+        <br>
+        <div class="row">
+            <div class="col-5 welcomeMessage">
                 <p>Welcome to CourseCheck,
                 <p>
             </div>
         </div>
-        <div class="row" style="margin-top: 5px;">
-            <div class="col-7" style="margin-left: 15%; font-size: x-large;">
+        <div class="row">
+            <div class="col-7 bulletPoints">
                 <p></p>
                 <li>Purpose of this site is to help students provide reviews for their courses.</li><br>
                 <li>These reviews can help students to make educated choices.</li><br>
@@ -51,31 +50,26 @@
                 <li>Students from any university can provide reviews for any classes.</li>
             </div>
         </div>
-        <div class="row" style="margin-top: 4%;">
-            <div class="col-7" style="margin-left: auto; margin-right: auto;">
-                <div class="input-group" style="height: 75px;">
-                    <input type="search" class="form-control rounded-end rounded-pill" placeholder="Search"
-                        aria-label="Search" aria-describedby="search-addon"
-                        style="font-size: xx-large; padding-left: 4%;" />
-                    <button id="search-button" type="button" class="btn btn-primary rounded-start rounded-pill"
-                        style="width: 70px; font-size: x-large; padding-right: 2%;">
+        <div class="row">
+            <div class="col-5 bigSearchRow">
+                <div class="input-group">
+                    <input type="search" class="form-control rounded-end rounded-pill bigSearchBar" placeholder="Search"
+                        aria-label="Search" aria-describedby="search-addon"/>
+                    <button id="search-button" type="button" class="btn btn-primary rounded-start rounded-pill bigSearchBtn">
                         <i class="bi bi-search"></i>
                     </button>
                 </div>
             </div>
         </div>
-        <div class="row" style="margin-top: 5%;">
-            <div class="col-3 rounded-pill"
-                style="background-color: #cceeee; text-align: center; margin-left: auto; margin-right: auto; font-size: xx-large;">
+        <div class="row">
+            <div class="col-3 rounded-pill bottomBubbles">
                 <p>Write reviews for your courses and help your fellow students out.</p>
             </div>
-            <div class="col-3 rounded-pill"
-                style="background-color: #cceeee; text-align: center; margin-left: auto; margin-right: auto; font-size: xx-large;">
+            <div class="col-3 rounded-pill bottomBubbles">
                 <p>Search for curated </p>
                 <p>reviews by courses or by Universities.</p>
             </div>
-            <div class="col-3 rounded-pill"
-                style="background-color: #cceeee; text-align: center; margin-left: auto; margin-right: auto; font-size: xx-large;">
+            <div class="col-3 rounded-pill bottomBubbles">
                 <p>Discover different </p>
                 <p>courses that suit your needs.</p>
             </div>
