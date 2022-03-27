@@ -1,56 +1,86 @@
-.nav {
-    background-color: black;
-    height: 100px;
+.topBar {
+  background-color: rgb(32, 32, 32);
+  color: white;
+  padding-top: 15px;
+  padding-bottom: 11px;
 }
 
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(3, auto);
-    width: 100%;
-    height: 205px;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.bottomBar {
+  background-color: rgb(32, 32, 32);
+  color: white;
+  padding-top: 15px;
+  padding-bottom: 11px;
+}
+.logo {
+  font-size: 65px;
+  padding-left: 13%;
 }
 
-.grid-item{
-    background-color: black;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: white;
-    padding: 50px;
-    width: 30%;
-    border: 2px solid white;
-    float: center;
+.loginBtn {
+  margin-left: 18px;
 }
 
-.navName {
-    float: left;
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    padding-left: 50px;
-    color: white;
+.userNameLogo {
+  font-size: 22px;
+  padding-right: 10px;
 }
 
-.login {
-    float: right;
-    
+.welcomeMessage {
+  margin-left: 3%;
+  font-size: 50px;
 }
 
-.searchBar {
-    float: center;
-    margin-left: 25%;
-    margin-right: 25%;
-    margin-top: 10%;
-    vertical-align: center;
-    height: 50px;
-    width: 500px;
+.searchHeading {
+  margin-left: 5%;
+  font-size: 50px;
+  margin-top: 3%;
 }
 
-.searchButton {
-    float: center;
-    margin-left: 25%;
-    margin-right: 25%;
-    vertical-align: center;
-    height: 50px;
-    width: 100px;
+.courseStarting {
+  margin-left: 9%;
+  margin-top: 1%;
+  font-size: x-large;
+}
+
+.courseCard {
+  margin-left: 8%;
+  margin-top: 1%;
+  display: block;
+}
+
+.courseStars {
+  font-size: 28px;
+}
+
+.bulletPoints {
+  margin-left: 15%;
+  font-size: x-large;
+}
+
+.bigSearchRow {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2%;
+}
+
+.bigSearchBar {
+  font-size: xx-large;
+  padding-left: 4%;
+  height: 75px;
+}
+
+.bigSearchBtn {
+  width: 70px;
+  font-size: x-large;
+  padding-right: 2%;
+  height: 75px;
+}
+
+.bottomBubbles {
+  background-color: #cceeee;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: xx-large;
+  margin-top: 4%;
 }
