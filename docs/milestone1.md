@@ -28,7 +28,7 @@ The first image below is our application's home page, where the top navbar has t
 
 ![alt text](/wireframesandactual/wireframeHomepage.PNG)
 
-![alt text](/wireframesandactual/homePage.PNG) 
+![alt text](/wireframesandactual/homepage.PNG)
 
 # **User Profile Page - Done by Muhammad Shah**
 
@@ -36,7 +36,7 @@ In the next image below, we have the profile page, which is for editing a user's
 
 ![alt text](/wireframesandactual/wireframeProfilepage.PNG)
 
-![alt text](/wireframesandactual/profilePage.PNG) 
+![alt text](/wireframesandactual/profilepage.PNG)
 
 # **Course Search Page - Done by Jeffrey Wong and Andy Lu**
 
@@ -44,7 +44,7 @@ In the next image below, we have the course search page, which shows up upon sea
 
 ![alt text](/wireframesandactual/wireframeCoursesearchpage.PNG)
 
-![alt text](/wireframesandactual/courseSearchPage.PNG) 
+![alt text](/wireframesandactual/coursesearchpage.PNG)
 
 # **University Search Page - Done by Manay Patel**
 
@@ -52,6 +52,6 @@ In the next image below, we have the school search page, which shows up upon sea
 
 ![alt text](/wireframesandactual/wireframeUnisearchpage.PNG)
 
-![alt text](/wireframesandactual/uniSearchPage.PNG) 
+![alt text](/wireframesandactual/uniSearchPage.PNG)
 
 Note: all wireframes hand drawn by Muhammad Shah
