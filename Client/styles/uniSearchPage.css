@@ -50,3 +50,8 @@
     background-color: rgb(32, 32, 32);
     color: white;
 }
+
+.cardLink{
+    text-decoration: none;
+    color: black;
+}
