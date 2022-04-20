@@ -26,32 +26,32 @@
 
 The first image below is our application's home page, where the top navbar has the application name and logo, a search bar to search for courses or schools, and a login/signup button for any users who desire to create an account on this website. This top navbar is consistent throughout each page created for this application. Below that, we have the main search bar that only stays on the homepage and basic descriptions of what the purpose of the application is.
 
-![alt text](/wireframesandactual/wireframeHomepage.PNG)
+![alt text](/milestone1/wireframesandactual/wireframeHomepage.PNG)
 
-![alt text](/wireframesandactual/homepage.PNG)
+![alt text](/milestone1/wireframesandactual/homepage.PNG)
 
 # **User Profile Page - Done by Muhammad Shah**
 
 In the next image below, we have the profile page, which is for editing a user's account profile. The user can edit things like their full name, email and password and also manage their existing reviews of courses, where they can edit it or simply delete it from the website overall.
 
-![alt text](/wireframesandactual/wireframeProfilepage.PNG)
+![alt text](.milestone1/wireframesandactual/wireframeProfilepage.PNG)
 
-![alt text](/wireframesandactual/profilepage.PNG)
+![alt text](/milestone1/wireframesandactual/profilepage.PNG)
 
 # **Course Search Page - Done by Jeffrey Wong and Andy Lu**
 
 In the next image below, we have the course search page, which shows up upon searching for a course that exists on this page. Within this page, we have things like the course name, rating, some reviews that exist from other users, and also buttons to submit your own rating or filter the reviews by certain metrics.
 
-![alt text](/wireframesandactual/wireframeCoursesearchpage.PNG)
+![alt text](/milestone1/wireframesandactual/wireframeCoursesearchpage.PNG)
 
-![alt text](/wireframesandactual/coursesearchpage.PNG)
+![alt text](/milestone1/wireframesandactual/coursesearchpage.PNG)
 
 # **University Search Page - Done by Manay Patel**
 
 In the next image below, we have the school search page, which shows up upon searching for a university that exists on this page. Within this page, we have the name of the school and available courses that are offered and have existing reviews already. From there, we can also filter this list of courses at the university by the same metrics as the course search page.
 
-![alt text](/wireframesandactual/wireframeUnisearchpage.PNG)
+![alt text](/milestone1/wireframesandactual/wireframeUnisearchpage.PNG)
 
-![alt text](/wireframesandactual/uniSearchPage.PNG)
+![alt text](/milestone1/wireframesandactual/uniSearchPage.PNG)
 
 Note: all wireframes hand drawn by Muhammad Shah
