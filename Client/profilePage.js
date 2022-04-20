@@ -1,36 +1,45 @@
-import * as dummy_server from './dummy_server.js';
+import * as client from './client.js';
 
+//empty array of reviews, empty string username.
 let myReviews = [];
-let orig_user = '';
+let orig_user = {};
 
+//demo profile, however we use fakedata. by default the user is logged out.
 loadProfile("Andy");
 
-window.localStorage.removeItem("login");
-
+//activate login/logout buttons. activate edit-profile button (though by default this is hidden)
 document.getElementById("log").addEventListener("click", login);
 document.getElementById("profileEdit").addEventListener("click", updateProfile);
 
-if(window.localStorage.getItem("login") === "true"){
-    login();
-}else{
-    logout();
-}
-
+//function to load the profile page.
 function loadProfile(username){
-    let user = dummy_server.getUser(username);
-    orig_user = user.username;
+    //get profile information
+    let user = client.userProfile(username);
+    orig_user = user;
+    let myname = user.username;
     let email = user.email;
     let password = user.password;
-    myReviews = dummy_server.getUserReviews(username);
+    myReviews = client.userRatings(username);
 
-    document.getElementById("welcomeUser").innerHTML = orig_user + "'s Profile";
-    document.getElementById("UserNameInputBox").value = orig_user;
+    //check if logged in/out. update html
+    if(window.localStorage.getItem("login") === "true"){
+        login();
+    }else{
+        logout();
+    }
+
+    //fill in info. not displayed when logged out but still not secure, to be fixed later
+    document.getElementById("UserNameInputBox").value = myname;
     document.getElementById("emailInputBox").value = email;
     document.getElementById("passwordInputBox").value = password;
+
+    //display reviews.
     loadReviews(document.getElementById("allReviews"));
+
     return;
 }
 
+//toggle visibility + usage of login/out button
 function logout(){
     window.localStorage.setItem("login", "false");
     document.getElementById("welcomeUser").innerHTML = orig_user + "'s Profile";
@@ -48,6 +57,7 @@ function logout(){
     return;
 }
 
+//toggle visibility + usage of login/out button
 function login(){
     window.localStorage.setItem("login", "true");
     document.getElementById("welcomeUser").innerHTML = "Welcome " + orig_user;
@@ -65,8 +75,9 @@ function login(){
     return;
 }
 
+//change profile info
 function updateProfile(){
-
+    //enable input boxes
     let username = document.getElementById("UserNameInputBox");
     username.disabled = false;
     let email = document.getElementById("emailInputBox");
@@ -74,42 +85,52 @@ function updateProfile(){
     let password = document.getElementById("passwordInputBox");
     password.disabled = false;
 
+    //toggle functionality of edit/save button
     let editButton = document.getElementById("profileEdit");
     editButton.innerHTML = "Save";
     editButton.removeEventListener("click", updateProfile);
     editButton.addEventListener("click", saveProfile);
 }
 
+//save profile info
 function saveProfile(){
+    //verify
     let mypass = window.prompt("Please input your current password to verify this change.");
-    if(mypass == dummy_server.getPassword(orig_user)){
+
+    if(mypass === orig_user.password){
+        //get new or unchanged properties
         let username = document.getElementById("UserNameInputBox");
         let email = document.getElementById("emailInputBox");
         let password = document.getElementById("passwordInputBox");
-        document.getElementById("profileEdit").addEventListener("click", updateProfile);
-        document.getElementById("profileEdit").removeEventListener("click", saveProfile);
-        dummy_server.updateUser(orig_user, username.value, email.value, password.value);
-        orig_user = username.value;
+
+        //change backend info for user, update global user variable
+        client.updateUser(orig_user.username, username.value, email.value, password.value);
+        orig_user = client.userProfile(username.value);
+
+        //reload profile
         loadProfile(username.value);
 
+        //toggle edit/save button
         let editButton = document.getElementById("profileEdit");
         editButton.innerHTML = "Edit";
         editButton.addEventListener("click", updateProfile);
         editButton.removeEventListener("click", saveProfile);
 
+        //disable input boxes
         username.disabled = true;
         email.disabled = true;
         password.disabled = true;
     }else{
         window.alert("Incorrect password. Please try again.");
     }
-    return false;
+    return;
 }
 
+//display a single review
 function renderReview(review, id){
-    console.log(id);
     let theReview = document.createElement("div");
 
+    //display some info
     let courseName = document.createElement("p");
     courseName.innerHTML = "Course: " + review.courseName;
     
@@ -119,12 +140,14 @@ function renderReview(review, id){
     let university = document.createElement("p");
     university.innerHTML = "University: " + review.university;
     
+    //create comment area
     let comment = document.createElement("textarea");
     comment.setAttribute("id", "comment"+id);
     comment.setAttribute("rows", 3);
     comment.disabled = true;
     comment.innerHTML = review.comment;
 
+    //create edit + delete buttons
     let edit = document.createElement("button");
     edit.innerHTML = "Edit";
     edit.addEventListener("click", function() {editReview(this)});
@@ -133,6 +156,7 @@ function renderReview(review, id){
     delBtn.innerHTML = "Delete";
     delBtn.addEventListener("click", function() {deleteReview(this.parentElement)});
     
+    //dom surgery
     theReview.appendChild(courseName);
     theReview.appendChild(university);
     theReview.appendChild(rating);
@@ -160,26 +184,22 @@ function editReview(element){
 }
 
 function saveReview(element){
+    let oldReviews = JSON.parse(JSON.stringify(myReviews));
     let id = element.id;
-    console.log(id);
     id = parseInt(id.substring(6));
     console.log(id);
     let myRev = myReviews[id];
     myRev.comment = document.getElementById("comment"+id).value;
     myReviews[id] = myRev;
-    updateBack();
+    client.updateReviews(oldReviews, myReviews);
     document.getElementById("allReviews").innerHTML = "";
     loadReviews(document.getElementById("allReviews"));
     return;
 }
 
-function updateBack(){
-    dummy_server.updateReviews(myReviews);
-}
-
 function loadReviews(element){
     element.innerHTML = "";
-    myReviews = dummy_server.getUserReviews(orig_user);
+    myReviews = client.userRatings(orig_user);
     for (let i = 0; i < myReviews.length; i++){
         if(myReviews[i] != null){
             element.appendChild(renderReview(myReviews[i], i));
@@ -189,10 +209,11 @@ function loadReviews(element){
 }
 
 function deleteReview(element){
+    let oldReviews = JSON.parse(JSON.stringify(myReviews));
     let id = element.id;
     id = parseInt(id.substring(6));
     delete myReviews[id];
-    updateBack();
+    client.updateReviews(oldReviews, myReviews);
     document.getElementById("allReviews").innerHTML = "";
     loadReviews(document.getElementById("allReviews"));
     console.log(myReviews);
