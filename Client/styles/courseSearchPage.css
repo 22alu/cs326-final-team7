@@ -11,6 +11,12 @@
   padding-top: 15px;
   padding-bottom: 11px;
 }
+
+.dropDown{
+  background-color: rgb(32, 32, 32);
+  color: white;
+}
+
 .logo {
   font-size: 65px;
   padding-left: 13%;
@@ -46,4 +52,6 @@
   font-size: larger;
   margin-left: 5%;
   margin-bottom: 5%;
+  margin-top: 1%; 
 }
+
