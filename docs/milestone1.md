@@ -34,7 +34,7 @@ The first image below is our application's home page, where the top navbar has t
 
 In the next image below, we have the profile page, which is for editing a user's account profile. The user can edit things like their full name, email and password and also manage their existing reviews of courses, where they can edit it or simply delete it from the website overall.
 
-![alt text](.milestone1/wireframesandactual/wireframeProfilepage.PNG)
+![alt text](/milestone1/wireframesandactual/wireframeProfilepage.PNG)
 
 ![alt text](/milestone1/wireframesandactual/profilepage.PNG)
 
