@@ -48,12 +48,25 @@ app.get('/userRatings', async (request, response) => {
     let fakeData = [];
     for(let i = 0; i < r; i++){
         let obj = {};
-        obj['uniName'] = faker.name.firstName();
-        obj['numRatings'] = faker.random.number({min: 1, max: 100});
-        obj['overallRating'] = Math.random() * 5;
+        obj['uniName'] = faker.random.words(2);
+        obj['courseName'] = faker.company.catchPhrase();
+        obj['rating'] = Math.round(Math.random() * 5 * 10) / 10;
+        obj['comment'] = faker.random.words(rand(5,15));
         fakeData.push(obj);
     }
     response.json(fakeData);
+});
+
+app.put('/updateUser', async (request, response) => {
+    const options = request.body;
+    console.log("Updated User Profile");
+    response.json("Updated User Profile");
+});
+
+app.put('/updateReviews', async (request, response) => {
+    const options = request.body;
+    console.log("Updated User Reviews");
+    response.json("Updated User Reviews");
 });
 
 app.get('/unis', async (request, response) => {

@@ -74,10 +74,49 @@ export async function userProfile(username) {
 
 export async function updateUser(username, newuser, email, password) {
     //to be implemented - substitute fake data for now
+    const response = await fetch(`/updateUser?userName=${userName}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            username: username,
+            newuser: newuser,
+            email: email,
+            password: password,
+        }),
+    });
+    const data = await response.json();
+    return data;
 }
 
-export async function updateReviews(oldReviews, newReviews) {
+export async function deleteReview(username, review) {
+  try {
+      const response = await fetch(`/deleteReview?userName=${username}`, {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(review),
+      });
+      const data = await response.json();
+      return data;
+  } catch (err) {
+      console.log(err);
+  }
+}
+
+export async function updateReviews(userName, newReviews) {
     //to be implemented - substitute fake data for now
+    const response = await fetch(`/updateReviews?userName=${userName}`, {
+      method: "PUT",
+      headers: {
+          "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newReviews),
+  });
+  const data = await response.json();
+  return data;
 }
 
 export async function createReview(courseName, uniName, rating) {

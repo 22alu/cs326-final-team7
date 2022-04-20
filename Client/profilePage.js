@@ -14,12 +14,12 @@ document.getElementById("profileEdit").addEventListener("click", updateProfile);
 //function to load the profile page.
 function loadProfile(username){
     //get profile information
-    let user = client.userProfile(username);
+    let user = await client.userProfile(username);
     orig_user = user;
     let myname = user.username;
     let email = user.email;
     let password = user.password;
-    myReviews = client.userRatings(username);
+    myReviews = await client.userRatings(username);
 
     //check if logged in/out. update html
     if(window.localStorage.getItem("login") === "true"){
@@ -104,8 +104,9 @@ function saveProfile(){
         let password = document.getElementById("passwordInputBox");
 
         //change backend info for user, update global user variable
-        client.updateUser(orig_user.username, username.value, email.value, password.value);
-        orig_user = client.userProfile(username.value);
+        const response = await client.updateUser(orig_user.username, username.value, email.value, password.value);
+        console.log(response);
+        orig_user = await client.userProfile(username.value);
 
         //reload profile
         loadProfile(username.value);
@@ -138,7 +139,7 @@ function renderReview(review, id){
     rating.innerText = "Rating: " + review.rating;
 
     let university = document.createElement("p");
-    university.innerText = "University: " + review.university;
+    university.innerText = "University: " + review.uniName;
     
     //create comment area
     let comment = document.createElement("textarea");
@@ -191,7 +192,8 @@ function saveReview(element){
     let myRev = myReviews[id];
     myRev.comment = document.getElementById("comment"+id).value;
     myReviews[id] = myRev;
-    client.updateReviews(oldReviews, myReviews);
+    const response = await client.updateReviews(oldReviews, myReviews);
+    console.log(response);
     document.getElementById("allReviews").innerText = "";
     loadReviews(document.getElementById("allReviews"));
     return;
@@ -199,7 +201,7 @@ function saveReview(element){
 
 function loadReviews(element){
     element.innerText = "";
-    myReviews = client.userRatings(orig_user);
+    myReviews = await client.userRatings(orig_user);
     for (let i = 0; i < myReviews.length; i++){
         if(myReviews[i] != null){
             element.appendChild(renderReview(myReviews[i], i));
@@ -209,11 +211,11 @@ function loadReviews(element){
 }
 
 function deleteReview(element){
-    let oldReviews = JSON.parse(JSON.stringify(myReviews));
     let id = element.id;
     id = parseInt(id.substring(6));
+    const response = await client.deleteReview(orig_user, myReviews[id]);
+    console.log(response);
     delete myReviews[id];
-    client.updateReviews(oldReviews, myReviews);
     document.getElementById("allReviews").innerText = "";
     loadReviews(document.getElementById("allReviews"));
     console.log(myReviews);
