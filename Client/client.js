@@ -13,6 +13,44 @@ export async function courseRatings(courseName, uniName) {
     }
 }
 
+export async function userRatings(username){
+  try {
+      const response = await fetch(
+          `/userRatings?username=${username}`,
+          {
+              method: "GET",
+          }
+      );
+      const data = await response.json();
+      return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function userProfile(username){
+  try{
+      const response = await fetch(
+      `/userRatings?userName=${username}`,
+        {
+            method: "GET",
+        }
+      );
+      const data = await response.json();
+      return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+
+export async function updateUser(username, newuser, email, password){
+  //to be implemented - substitute fake data for now
+}
+
+export async function updateReviews(oldReviews, newReviews){
+  //to be implemented - substitute fake data for now
+}
+
 export async function createReview(courseName, uniName, rating) {
     const response = await fetch(`/createReview`, {
       method: 'POST',

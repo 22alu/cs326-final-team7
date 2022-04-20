@@ -16,7 +16,7 @@ app.use("/client", express.static("Client"));
 app.get('/courseRatings', async (request, response) => {
     const options = request.body;
     const r = rand(5,10);
-    let fakeData = []
+    let fakeData = [];
     for(let i = 0; i < r; i++){
         let obj = {};
         obj['user'] = faker.name.firstName();
@@ -30,7 +30,7 @@ app.get('/courseRatings', async (request, response) => {
 app.get('/uniRatings', async (request, response) => {
     const options = request.body;
     const r = rand(5,10);
-    let fakeData = []
+    let fakeData = [];
     for(let i = 0; i < r; i++){
         let obj = {};
         obj['uniName'] = faker.name.firstName();
@@ -40,6 +40,29 @@ app.get('/uniRatings', async (request, response) => {
     }
     response.json(fakeData);
 });
+
+app.get('/userRatings', async (request, response) => {
+    const options = request.body;
+    const r = rand(5, 10);
+    let fakeData = [];
+    for(let i = 0; i < r; i++){
+        let obj = {};
+        obj['uniName'] = faker.name.firstName();
+        obj['numRatings'] = faker.random.number({min: 1, max: 100});
+        obj['overallRating'] = Math.random() * 5;
+        fakeData.push(obj);
+    }
+    response.json(fakeData);
+});
+
+app.get('userProfile', async (request, response) => {
+    const options = request.body;
+    let fakeData = {};
+    obj['username'] = faker.name.firstName();
+    obj['password'] = faker.name());
+    obj['email'] = fake.name();
+    response.json(fakeData);
+})
 
 app.post('/createReview', async (request, response) => {
     const options = request.body;
