@@ -1,0 +1,47 @@
+.topBar{
+    background-color: rgb(32, 32, 32); 
+    color: white;
+    padding-top: 15px; 
+    padding-bottom: 11px;
+}
+
+.bottomBar {
+    background-color: rgb(32, 32, 32); 
+    color: white;
+    padding-top: 15px; 
+    padding-bottom: 11px;
+}
+.logo{
+    font-size: 65px; 
+    padding-left: 13%;
+}
+
+.loginBtn{
+    margin-left: 18px;
+}
+
+.userNameLogo{
+    font-size: 22px; 
+    padding-right: 10px;
+}
+
+.searchHeading{
+    margin-left: 5%;
+    font-size: 50px;
+    margin-top: 3%; 
+}
+
+.courseStarting{
+    margin-left: 9%;
+    margin-top: 1%;
+    font-size: x-large;
+}
+
+.courseCard{
+    margin-left: 8%; 
+    margin-top: 2%;
+}
+
+.courseStars{
+    font-size: 28px;
+}
