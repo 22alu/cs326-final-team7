@@ -39,6 +39,30 @@ export async function uniCourses(UniName) {
     }
 }
 
+export async function uniList(UniName) {
+    try {
+        const response = await fetch(`/unis?uniName=${UniName}`, {
+            method: "GET",
+        });
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export async function courseList(courseName) {
+    try {
+        const response = await fetch(`/courses?courseName=${courseName}`, {
+            method: "GET",
+        });
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 export async function createReview(courseName, uniName, rating) {
     const response = await fetch(`/createReview`, {
       method: 'POST',
