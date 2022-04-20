@@ -75,12 +75,13 @@ app.get('/courses', async (request, response) => {
     }
     response.json(fakeData);
 });
-app.get('userProfile', async (request, response) => {
+
+app.get('/userProfile', async (request, response) => {
     const options = request.body;
     let fakeData = {};
     obj['username'] = faker.name.firstName();
-    obj['password'] = faker.name());
-    obj['email'] = fake.name();
+    obj['password'] = faker.name();
+    obj['email'] = faker.internet.exampleEmail();
     response.json(fakeData);
 })
 

@@ -62,7 +62,7 @@ export async function userRatings(username) {
 
 export async function userProfile(username) {
     try {
-        const response = await fetch(`/userRatings?userName=${username}`, {
+        const response = await fetch(`/userProfile?userName=${username}`, {
             method: "GET",
         });
         const data = await response.json();
