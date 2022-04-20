@@ -28,7 +28,7 @@ The first image below is our application's home page, where the top navbar has t
 
 ![alt text](/milestone1/wireframesandactual/wireframeHomepage.PNG)
 
-![alt text](/milestone1/wireframesandactual/homepage.PNG)
+![alt text](/milestone1/wireframesandactual/homePage.PNG)
 
 # **User Profile Page - Done by Muhammad Shah**
 
@@ -36,7 +36,7 @@ In the next image below, we have the profile page, which is for editing a user's
 
 ![alt text](/milestone1/wireframesandactual/wireframeProfilepage.PNG)
 
-![alt text](/milestone1/wireframesandactual/profilepage.PNG)
+![alt text](/milestone1/wireframesandactual/profilePage.PNG)
 
 # **Course Search Page - Done by Jeffrey Wong and Andy Lu**
 
@@ -44,7 +44,7 @@ In the next image below, we have the course search page, which shows up upon sea
 
 ![alt text](/milestone1/wireframesandactual/wireframeCoursesearchpage.PNG)
 
-![alt text](/milestone1/wireframesandactual/coursesearchpage.PNG)
+![alt text](/milestone1/wireframesandactual/courseSearchPage.PNG)
 
 # **University Search Page - Done by Manay Patel**
 
