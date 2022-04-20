@@ -13,18 +13,6 @@ export async function courseRatings(courseName, uniName) {
     }
 }
 
-export async function uniCourses(UniName) {
-    try {
-        const response = await fetch(`/uniCourses?uniName=${UniName}`, {
-            method: "GET",
-        });
-        const data = await response.json();
-        return data;
-    } catch (err) {
-        console.log(err);
-    }
-}
-
 export async function uniList(UniName) {
     try {
         const response = await fetch(`/unis?uniName=${UniName}`, {

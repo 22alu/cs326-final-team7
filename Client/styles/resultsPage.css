@@ -1,6 +1,12 @@
-.card2 {
-    margin-left: 200px;
-  }
-  .card1 {
-    margin-left: 1000px;
-  }
+.cardStyle {
+  /* margin-left: 200px; */
+  font-family: 'Times New Roman', Times, serif;
+  font-size: 20px;
+  width: 30rem;
+}
+
+.cardHeading {
+  margin-left: 5%;
+  font-size: 40px;
+  margin-top: 3%;
+}

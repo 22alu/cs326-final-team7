@@ -20,7 +20,7 @@ app.get('/courseRatings', async (request, response) => {
     for(let i = 0; i < r; i++){
         let obj = {};
         obj['user'] = faker.name.firstName();
-        obj['rate'] = faker.random.number({min: 0, max: 5});
+        obj['rate'] = faker.datatype.number({min: 0, max: 5});
         obj['description'] = faker.random.words(rand(5,15));
         fakeData.push(obj);
     }
@@ -33,9 +33,9 @@ app.get('/uniRatings', async (request, response) => {
     let fakeData = [];
     for(let i = 0; i < r; i++){
         let obj = {};
-        obj['courseNumber'] = faker.random.alpha({ count: 2, upcase: true,}) + faker.random.number({min: 100, max: 999});
+        obj['courseNumber'] = faker.random.alpha({ count: 2, upcase: true,}) + faker.datatype.number({min: 100, max: 999});
         obj['courseName'] = faker.company.catchPhrase();
-        obj['numRatings'] = faker.random.number({min: 1, max: 100});
+        obj['numRatings'] = faker.datatype.number({min: 1, max: 100});
         obj['overallRating'] = Math.round(Math.random() * 5 * 10) / 10;
         fakeData.push(obj);
     }
@@ -74,7 +74,7 @@ app.get('/unis', async (request, response) => {
     const r = rand(2,7);
     let fakeData = []
     for(let i = 0; i < r; i++){
-        fakeData.push(faker.random.words(2));
+        fakeData.push(request.query.uniName.toUpperCase() + ' ' + faker.random.words(rand(0,2)));
     }
     response.json(fakeData);
 });
@@ -84,7 +84,7 @@ app.get('/courses', async (request, response) => {
     const r = rand(2,7);
     let fakeData = []
     for(let i = 0; i < r; i++){
-        fakeData.push(faker.company.catchPhrase());
+        fakeData.push(request.query.courseName.toUpperCase() + ' ' + faker.company.catchPhrase());
     }
     response.json(fakeData);
 });
