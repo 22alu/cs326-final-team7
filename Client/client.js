@@ -1,17 +1,3 @@
-//All API calls will be made here.
-//Example:
-// export async function readCounter(name) {
-//   try {
-//     const response = await fetch(`/read?name=${name}`, {
-//       method: "GET",
-//     });
-//     const data = await response.json();
-//     return data;
-//   } catch (err) {
-//     console.log(err);
-//   }
-// }
-
 export async function courseRatings(courseName, uniName) {
     try {
         const response = await fetch(
@@ -74,3 +60,19 @@ export async function createReview(courseName, uniName, rating) {
     const data = await response.json();
     return data;
   }
+
+export async function uniRatings(uniName) {
+  try {
+    const response = await fetch(
+      `/courseRatings?uniName=${uniName}`,
+      {
+        method: "GET",
+      }
+    );
+    const data = await response.json();
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+}
+

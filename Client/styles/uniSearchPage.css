@@ -45,3 +45,8 @@
 .courseStars{
     font-size: 28px;
 }
+
+.dropDown{
+    background-color: rgb(32, 32, 32);
+    color: white;
+}
