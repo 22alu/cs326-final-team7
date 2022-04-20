@@ -28,7 +28,7 @@ The first image below is our application's home page, where the top navbar has t
 
 ![alt text](/milestone1/wireframesandactual/wireframeHomepage.PNG)
 
-![alt text](/milestone1/wireframesandactual/homePage.PNG)
+![alt text](/milestone1/wireframesandactual/homePage.png)
 
 # **User Profile Page - Done by Muhammad Shah**
 
