@@ -42,16 +42,16 @@ function loadProfile(username){
 //toggle visibility + usage of login/out button
 function logout(){
     window.localStorage.setItem("login", "false");
-    document.getElementById("welcomeUser").innerHTML = orig_user + "'s Profile";
+    document.getElementById("welcomeUser").innerText = orig_user + "'s Profile";
     document.getElementById("UserNameInputBox").style.display = "none";
     document.getElementById("userLabel").style.display = "none";
     document.getElementById("emailInputBox").style.display = "none";
     document.getElementById("emailLabel").style.display = "none";
     document.getElementById("passwordInputBox").style.display = "none";
     document.getElementById("pwLabel").style.display = "none";
-    document.getElementById("commentHeader").innerHTML = orig_user + "'s Reviews";
+    document.getElementById("commentHeader").innerText = orig_user + "'s Reviews";
     document.getElementById("profileEdit").style.display = "none";
-    document.getElementById("log").innerHTML = "Log In";
+    document.getElementById("log").innerText = "Log In";
     document.getElementById("log").removeEventListener("click", logout);
     document.getElementById("log").addEventListener("click", login);
     return;
@@ -60,16 +60,16 @@ function logout(){
 //toggle visibility + usage of login/out button
 function login(){
     window.localStorage.setItem("login", "true");
-    document.getElementById("welcomeUser").innerHTML = "Welcome " + orig_user;
+    document.getElementById("welcomeUser").innerText = "Welcome " + orig_user;
     document.getElementById("UserNameInputBox").style.display = "block";
     document.getElementById("userLabel").style.display = "block";
     document.getElementById("emailInputBox").style.display = "block";
     document.getElementById("emailLabel").style.display = "block";
     document.getElementById("passwordInputBox").style.display = "block";
     document.getElementById("pwLabel").style.display = "block";
-    document.getElementById("commentHeader").innerHTML = "Your Reviews";
+    document.getElementById("commentHeader").innerText = "Your Reviews";
     document.getElementById("profileEdit").style.display = "block";
-    document.getElementById("log").innerHTML = "Log Out";
+    document.getElementById("log").innerText = "Log Out";
     document.getElementById("log").addEventListener("click", logout);
     document.getElementById("log").removeEventListener("click", login);
     return;
@@ -87,7 +87,7 @@ function updateProfile(){
 
     //toggle functionality of edit/save button
     let editButton = document.getElementById("profileEdit");
-    editButton.innerHTML = "Save";
+    editButton.innerText = "Save";
     editButton.removeEventListener("click", updateProfile);
     editButton.addEventListener("click", saveProfile);
 }
@@ -112,7 +112,7 @@ function saveProfile(){
 
         //toggle edit/save button
         let editButton = document.getElementById("profileEdit");
-        editButton.innerHTML = "Edit";
+        editButton.innerText = "Edit";
         editButton.addEventListener("click", updateProfile);
         editButton.removeEventListener("click", saveProfile);
 
@@ -132,28 +132,28 @@ function renderReview(review, id){
 
     //display some info
     let courseName = document.createElement("p");
-    courseName.innerHTML = "Course: " + review.courseName;
+    courseName.innerText = "Course: " + review.courseName;
     
     let rating = document.createElement("p");
-    rating.innerHTML = "Rating: " + review.rating;
+    rating.innerText = "Rating: " + review.rating;
 
     let university = document.createElement("p");
-    university.innerHTML = "University: " + review.university;
+    university.innerText = "University: " + review.university;
     
     //create comment area
     let comment = document.createElement("textarea");
     comment.setAttribute("id", "comment"+id);
     comment.setAttribute("rows", 3);
     comment.disabled = true;
-    comment.innerHTML = review.comment;
+    comment.innerText = review.comment;
 
     //create edit + delete buttons
     let edit = document.createElement("button");
-    edit.innerHTML = "Edit";
+    edit.innerText = "Edit";
     edit.addEventListener("click", function() {editReview(this)});
     
     let delBtn = document.createElement("button");
-    delBtn.innerHTML = "Delete";
+    delBtn.innerText = "Delete";
     delBtn.addEventListener("click", function() {deleteReview(this.parentElement)});
     
     //dom surgery
@@ -170,7 +170,7 @@ function renderReview(review, id){
 }
 
 function editReview(element){
-    element.innerHTML = "Save";
+    element.innerText = "Save";
     element.removeEventListener("click", function() { editReview(this)});
     element.addEventListener("click", function() {saveReview(this.parentElement)} );
 
@@ -192,13 +192,13 @@ function saveReview(element){
     myRev.comment = document.getElementById("comment"+id).value;
     myReviews[id] = myRev;
     client.updateReviews(oldReviews, myReviews);
-    document.getElementById("allReviews").innerHTML = "";
+    document.getElementById("allReviews").innerText = "";
     loadReviews(document.getElementById("allReviews"));
     return;
 }
 
 function loadReviews(element){
-    element.innerHTML = "";
+    element.innerText = "";
     myReviews = client.userRatings(orig_user);
     for (let i = 0; i < myReviews.length; i++){
         if(myReviews[i] != null){
@@ -214,7 +214,7 @@ function deleteReview(element){
     id = parseInt(id.substring(6));
     delete myReviews[id];
     client.updateReviews(oldReviews, myReviews);
-    document.getElementById("allReviews").innerHTML = "";
+    document.getElementById("allReviews").innerText = "";
     loadReviews(document.getElementById("allReviews"));
     console.log(myReviews);
     return;
