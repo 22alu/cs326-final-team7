@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "directories": {
     "doc": "docs"
   },
@@ -21,6 +22,10 @@
   "homepage": "https://github.com/22alu/cs326-final-team7#readme",
   "dependencies": {
     "express": "^4.17.3",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^6.1.2"
   }
 }
