@@ -33,9 +33,10 @@ app.get('/uniRatings', async (request, response) => {
     let fakeData = []
     for(let i = 0; i < r; i++){
         let obj = {};
-        obj['uniName'] = faker.name.firstName();
+        obj['courseNumber'] = faker.random.alpha({ count: 2, upcase: true,}) + faker.random.number({min: 100, max: 999});
+        obj['courseName'] = faker.name.firstName();
         obj['numRatings'] = faker.random.number({min: 1, max: 100});
-        obj['overallRating'] = Math.random() * 5;
+        obj['overallRating'] = Math.round(Math.random() * 5 * 10) / 10;
         fakeData.push(obj);
     }
     response.json(fakeData);

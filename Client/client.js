@@ -28,7 +28,7 @@ export async function createReview(courseName, uniName, rating) {
 export async function uniRatings(uniName) {
   try {
     const response = await fetch(
-      `/courseRatings?uniName=${uniName}`,
+      `/uniRatings?uniName=${uniName}`,
       {
         method: "GET",
       }
