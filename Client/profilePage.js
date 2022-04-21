@@ -21,6 +21,9 @@ async function loadProfile(username){
     let password = user.password;
     myReviews = await client.userRatings(username);
 
+    //display reviews.
+    await loadReviews(document.getElementById("allReviews"));
+
     //check if logged in/out. update html
     if(window.localStorage.getItem("login") === "true"){
         login();
@@ -32,9 +35,6 @@ async function loadProfile(username){
     document.getElementById("UserNameInputBox").value = myname;
     document.getElementById("emailInputBox").value = email;
     document.getElementById("passwordInputBox").value = password;
-
-    //display reviews.
-    loadReviews(document.getElementById("allReviews"));
 
     return;
 }
@@ -54,6 +54,7 @@ function logout(){
     document.getElementById("log").innerText = "Log In";
     document.getElementById("log").removeEventListener("click", logout);
     document.getElementById("log").addEventListener("click", login);
+    toggleReviewButtons();
     return;
 }
 
@@ -72,7 +73,20 @@ function login(){
     document.getElementById("log").innerText = "Log Out";
     document.getElementById("log").addEventListener("click", logout);
     document.getElementById("log").removeEventListener("click", login);
+    toggleReviewButtons();
     return;
+}
+
+function toggleReviewButtons(){
+    for(let count in myReviews){
+        if(window.localStorage.getItem("login") === "true"){
+            document.getElementById("editBtn"+count).style.display = "block";
+            document.getElementById("delBtn"+count).style.display = "block";
+        }else{
+            document.getElementById("editBtn"+count).style.display = "none";
+            document.getElementById("delBtn"+count).style.display = "none";
+        }
+    }
 }
 
 //change profile info
@@ -105,7 +119,6 @@ async function saveProfile(){
 
         //change backend info for user, update global user variable
         const response = await client.updateUser(orig_user.username, username.value, email.value, password.value);
-        console.log(response);
         orig_user = await client.userProfile(username.value);
 
         //reload profile
@@ -153,10 +166,12 @@ function renderReview(review, id){
     //create edit + delete buttons
     let edit = document.createElement("button");
     edit.innerText = "Edit";
+    edit.setAttribute("id", "editBtn"+id);
     edit.addEventListener("click", function() {editReview(this)});
     
     let delBtn = document.createElement("button");
     delBtn.innerText = "Delete";
+    delBtn.setAttribute("id", "delBtn"+id);
     delBtn.addEventListener("click", function() {deleteReview(this.parentElement)});
     
     //dom surgery
@@ -178,9 +193,7 @@ function editReview(element){
 
     let id = element.parentElement.id;
     id = parseInt(id.substring(6));
-    console.log(id);
     let comment = document.getElementById("comment"+id);
-    console.log(comment);
     comment.disabled = false;
     return;
 }
@@ -189,12 +202,10 @@ async function saveReview(element){
     let oldReviews = JSON.parse(JSON.stringify(myReviews));
     let id = element.id;
     id = parseInt(id.substring(6));
-    console.log(id);
     let myRev = myReviews[id];
     myRev.comment = document.getElementById("comment"+id).value;
     myReviews[id] = myRev;
     const response = await client.updateReviews(oldReviews, myReviews);
-    console.log(response);
     document.getElementById("allReviews").innerText = "";
     loadReviews(document.getElementById("allReviews"));
     return;
@@ -215,11 +226,9 @@ async function deleteReview(element){
     let id = element.id;
     id = parseInt(id.substring(6));
     const response = await client.deleteReview(orig_user.username, myReviews[id]);
-    console.log(response);
     delete myReviews[id];
     document.getElementById("allReviews").innerText = "";
     loadReviews(document.getElementById("allReviews"));
-    console.log(myReviews);
     return;
 }
 
@@ -228,6 +237,5 @@ document.getElementById("smallSearch").addEventListener("click", () => {
 });
 
 function redirectToResults(querry){
-    console.log(querry);
     window.location.href = "resultsPage.html?search=" + querry;
 }
