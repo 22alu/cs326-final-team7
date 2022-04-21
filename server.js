@@ -7,7 +7,7 @@ function rand(min, max) {
 }
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 80;
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -74,7 +74,7 @@ app.get('/unis', async (request, response) => {
     const r = rand(2,7);
     let fakeData = []
     for(let i = 0; i < r; i++){
-        fakeData.push(request.query.uniName.toUpperCase() + ' ' + faker.random.words(rand(0,2)));
+        fakeData.push(request.query.query.toUpperCase() + ' ' + faker.random.words(rand(0,2)));
     }
     response.json(fakeData);
 });
@@ -110,10 +110,14 @@ app.delete('/deleteReview', async (request, response) => {
     response.json("Deleted the review");
 });
 
+app.get('/', async (request, response) =>{
+    response.redirect('/Client/index.html');
+})
+
 app.get("*", async (request, response) => {
     response.status(404).send(`Not found: ${request.path}`);
 });
 
 app.listen(port, () => {
     console.log(`Server started on port ${port}`);
-});
+}); 
