@@ -67,7 +67,7 @@ function login(){
     document.getElementById("emailLabel").style.display = "block";
     document.getElementById("passwordInputBox").style.display = "block";
     document.getElementById("pwLabel").style.display = "block";
-    document.getElementById("commentHeader").innerText = "Your Reviews";
+    document.getElementById("commentHeader").innerText = "Your Reviews:";
     document.getElementById("profileEdit").style.display = "block";
     document.getElementById("log").innerText = "Log Out";
     document.getElementById("log").addEventListener("click", logout);
@@ -130,7 +130,8 @@ async function saveProfile(){
 //display a single review
 function renderReview(review, id){
     let theReview = document.createElement("div");
-
+    theReview.appendChild(document.createElement("br"));
+    theReview.appendChild(document.createElement("hr"));
     //display some info
     let courseName = document.createElement("p");
     courseName.innerText = "Course: " + review.courseName;
@@ -143,6 +144,7 @@ function renderReview(review, id){
     
     //create comment area
     let comment = document.createElement("textarea");
+    comment.classList.add("commentArea");
     comment.setAttribute("id", "comment"+id);
     comment.setAttribute("rows", 3);
     comment.disabled = true;
@@ -166,7 +168,6 @@ function renderReview(review, id){
     theReview.appendChild(delBtn);
 
     theReview.setAttribute("id", "review"+id);
-
     return theReview;
 }
 
