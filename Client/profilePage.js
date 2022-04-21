@@ -12,7 +12,7 @@ document.getElementById("log").addEventListener("click", login);
 document.getElementById("profileEdit").addEventListener("click", updateProfile);
 
 //function to load the profile page.
-function loadProfile(username){
+async function loadProfile(username){
     //get profile information
     let user = await client.userProfile(username);
     orig_user = user;
@@ -42,14 +42,14 @@ function loadProfile(username){
 //toggle visibility + usage of login/out button
 function logout(){
     window.localStorage.setItem("login", "false");
-    document.getElementById("welcomeUser").innerText = orig_user + "'s Profile";
+    document.getElementById("welcomeUser").innerText = orig_user.username + "'s Profile";
     document.getElementById("UserNameInputBox").style.display = "none";
     document.getElementById("userLabel").style.display = "none";
     document.getElementById("emailInputBox").style.display = "none";
     document.getElementById("emailLabel").style.display = "none";
     document.getElementById("passwordInputBox").style.display = "none";
     document.getElementById("pwLabel").style.display = "none";
-    document.getElementById("commentHeader").innerText = orig_user + "'s Reviews";
+    document.getElementById("commentHeader").innerText = orig_user.username + "'s Reviews";
     document.getElementById("profileEdit").style.display = "none";
     document.getElementById("log").innerText = "Log In";
     document.getElementById("log").removeEventListener("click", logout);
@@ -60,7 +60,7 @@ function logout(){
 //toggle visibility + usage of login/out button
 function login(){
     window.localStorage.setItem("login", "true");
-    document.getElementById("welcomeUser").innerText = "Welcome " + orig_user;
+    document.getElementById("welcomeUser").innerText = "Welcome " + orig_user.username;
     document.getElementById("UserNameInputBox").style.display = "block";
     document.getElementById("userLabel").style.display = "block";
     document.getElementById("emailInputBox").style.display = "block";
@@ -93,7 +93,7 @@ function updateProfile(){
 }
 
 //save profile info
-function saveProfile(){
+async function saveProfile(){
     //verify
     let mypass = window.prompt("Please input your current password to verify this change.");
 
@@ -184,7 +184,7 @@ function editReview(element){
     return;
 }
 
-function saveReview(element){
+async function saveReview(element){
     let oldReviews = JSON.parse(JSON.stringify(myReviews));
     let id = element.id;
     id = parseInt(id.substring(6));
@@ -199,9 +199,9 @@ function saveReview(element){
     return;
 }
 
-function loadReviews(element){
+async function loadReviews(element){
     element.innerText = "";
-    myReviews = await client.userRatings(orig_user);
+    myReviews = await client.userRatings(orig_user.username);
     for (let i = 0; i < myReviews.length; i++){
         if(myReviews[i] != null){
             element.appendChild(renderReview(myReviews[i], i));
@@ -210,10 +210,10 @@ function loadReviews(element){
     return;
 }
 
-function deleteReview(element){
+async function deleteReview(element){
     let id = element.id;
     id = parseInt(id.substring(6));
-    const response = await client.deleteReview(orig_user, myReviews[id]);
+    const response = await client.deleteReview(orig_user.username, myReviews[id]);
     console.log(response);
     delete myReviews[id];
     document.getElementById("allReviews").innerText = "";

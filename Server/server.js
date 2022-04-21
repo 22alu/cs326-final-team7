@@ -92,9 +92,9 @@ app.get('/courses', async (request, response) => {
 app.get('/userProfile', async (request, response) => {
     const options = request.body;
     let fakeData = {};
-    obj['username'] = faker.name.firstName();
-    obj['password'] = faker.name();
-    obj['email'] = faker.internet.exampleEmail();
+    fakeData['username'] = faker.name.firstName();
+    fakeData['password'] = faker.random.words();
+    fakeData['email'] = faker.internet.exampleEmail();
     response.json(fakeData);
 })
 

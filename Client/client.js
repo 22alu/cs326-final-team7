@@ -62,7 +62,7 @@ export async function userProfile(username) {
 
 export async function updateUser(username, newuser, email, password) {
     //to be implemented - substitute fake data for now
-    const response = await fetch(`/updateUser?userName=${userName}`, {
+    const response = await fetch(`/updateUser?userName=${username}`, {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",
