@@ -1,37 +1,47 @@
-.topBar{
-    background-color: rgb(32, 32, 32); 
+.topBar {
+    background-color: rgb(32, 32, 32);
     color: white;
-    padding-top: 15px; 
+    padding-top: 15px;
     padding-bottom: 11px;
 }
 
 .bottomBar {
-    background-color: rgb(32, 32, 32); 
+    background-color: rgb(32, 32, 32);
     color: white;
-    padding-top: 15px; 
+    padding-top: 15px;
     padding-bottom: 11px;
 }
-.logo{
-    font-size: 65px; 
+
+.logo {
+    font-size: 65px;
     padding-left: 13%;
+    color: white;
 }
 
-.loginBtn{
+.loginBtn {
     margin-left: 18px;
 }
 
-.userNameLogo{
-    font-size: 22px; 
+.userNameLogo {
+    font-size: 22px;
     padding-right: 10px;
 }
 
-.welcomeMessage{
+.welcomeMessage {
     margin-left: 3%;
-    margin-top: 1%; 
+    margin-top: 1%;
     font-size: 50px;
 }
 
-.profileCard{
+.profileCard {
     margin-left: 2%;
     margin-top: 1%;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
 }

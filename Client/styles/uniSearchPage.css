@@ -1,57 +1,67 @@
-.topBar{
-    background-color: rgb(32, 32, 32); 
+.topBar {
+    background-color: rgb(32, 32, 32);
     color: white;
-    padding-top: 15px; 
+    padding-top: 15px;
     padding-bottom: 11px;
 }
 
 .bottomBar {
-    background-color: rgb(32, 32, 32); 
+    background-color: rgb(32, 32, 32);
     color: white;
-    padding-top: 15px; 
+    padding-top: 15px;
     padding-bottom: 11px;
 }
-.logo{
-    font-size: 65px; 
+
+.logo {
+    font-size: 65px;
     padding-left: 13%;
+    color: white;
 }
 
-.loginBtn{
+.loginBtn {
     margin-left: 18px;
 }
 
-.userNameLogo{
-    font-size: 22px; 
+.userNameLogo {
+    font-size: 22px;
     padding-right: 10px;
 }
 
-.searchHeading{
+.searchHeading {
     margin-left: 5%;
     font-size: 50px;
-    margin-top: 3%; 
+    margin-top: 3%;
 }
 
-.courseStarting{
+.courseStarting {
     margin-left: 9%;
     margin-top: 1%;
     font-size: x-large;
 }
 
-.courseCard{
-    margin-left: 8%; 
+.courseCard {
+    margin-left: 8%;
     margin-top: 2%;
 }
 
-.courseStars{
+.courseStars {
     font-size: 28px;
 }
 
-.dropDown{
+.dropDown {
     background-color: rgb(32, 32, 32);
     color: white;
 }
 
-.cardLink{
+.cardLink {
     text-decoration: none;
     color: black;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
 }

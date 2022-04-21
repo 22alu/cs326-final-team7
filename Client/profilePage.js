@@ -221,3 +221,12 @@ function deleteReview(element){
     console.log(myReviews);
     return;
 }
+
+document.getElementById("smallSearch").addEventListener("click", () => {
+    redirectToResults(document.getElementById("smallInput").value);
+});
+
+function redirectToResults(querry){
+    console.log(querry);
+    window.location.href = "resultsPage.html?search=" + querry;
+}

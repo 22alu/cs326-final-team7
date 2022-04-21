@@ -1,64 +1,74 @@
-.topBar{
-    background-color: rgb(32, 32, 32); 
+.topBar {
+    background-color: rgb(32, 32, 32);
     color: white;
-    padding-top: 15px; 
+    padding-top: 15px;
     padding-bottom: 11px;
 }
 
 .bottomBar {
-    background-color: rgb(32, 32, 32); 
+    background-color: rgb(32, 32, 32);
     color: white;
-    padding-top: 15px; 
+    padding-top: 15px;
     padding-bottom: 11px;
 }
-.logo{
-    font-size: 65px; 
+
+.logo {
+    font-size: 65px;
     padding-left: 13%;
+    color: white;
 }
 
-.loginBtn{
+.loginBtn {
     margin-left: 18px;
 }
 
-.userNameLogo{
-    font-size: 22px; 
+.userNameLogo {
+    font-size: 22px;
     padding-right: 10px;
 }
 
-.welcomeMessage{
-    margin-left: 3%; 
+.welcomeMessage {
+    margin-left: 3%;
     font-size: 50px;
 }
 
-.bulletPoints{
-    margin-left: 15%; 
+.bulletPoints {
+    margin-left: 15%;
     font-size: x-large;
 }
 
-.bigSearchRow{
-    margin-left: auto; 
-    margin-right: auto; 
+.bigSearchRow {
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 2%;
 }
 
-.bigSearchBar{
-    font-size: xx-large; 
-    padding-left: 4%; 
+.bigSearchBar {
+    font-size: xx-large;
+    padding-left: 4%;
     height: 75px;
 }
 
-.bigSearchBtn{
-    width: 70px; 
-    font-size: x-large; 
-    padding-right: 2%; 
+.bigSearchBtn {
+    width: 70px;
+    font-size: x-large;
+    padding-right: 2%;
     height: 75px;
 }
 
-.bottomBubbles{
-    background-color: #cceeee; 
-    text-align: center; 
-    margin-left: auto; 
-    margin-right: auto; 
-    font-size: xx-large; 
+.bottomBubbles {
+    background-color: #cceeee;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: xx-large;
     margin-top: 4%;
+}
+
+a,
+a:link,
+a:visited,
+a:hover,
+a:active {
+    text-decoration: none;
 }
