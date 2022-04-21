@@ -61,7 +61,6 @@ sortSelector.addEventListener("change", function(event) {
     else{
         sortRatings(1);
     }
-    document.getElementById("cardRatings").innerHTML = "";
     displayRatings();
 });
 
@@ -70,6 +69,7 @@ function sortRatings(coef){
 }
 
 function displayRatings(){
+    document.getElementById("cardRatings").innerHTML = "";
     ratings.forEach(rating => createRatingCard(rating));
 }
 
