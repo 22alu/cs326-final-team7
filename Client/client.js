@@ -13,9 +13,9 @@ export async function courseRatings(courseName, uniName) {
     }
 }
 
-export async function uniList(UniName) {
+export async function uniList(query) {
     try {
-        const response = await fetch(`/unis?uniName=${UniName}`, {
+        const response = await fetch(`/unis?query=${query}`, {
             method: "GET",
         });
         const data = await response.json();
@@ -71,7 +71,7 @@ export async function updateUser(username, newuser, email, password) {
             username: username,
             newuser: newuser,
             email: email,
-            password: password,
+            password: password
         }),
     });
     const data = await response.json();

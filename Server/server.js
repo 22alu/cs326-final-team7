@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import express from "express";
+import express, { response } from "express";
 import logger from "morgan";
 
 function rand(min, max) {
@@ -102,6 +102,12 @@ app.post('/createReview', async (request, response) => {
     const options = request.body;
     console.log("Created a new review");
     response.json("Created a new review");
+});
+
+app.delete('/deleteReview', async (request, response) => {
+    const options = request.body;
+    console.log("Deleted the review");
+    response.json("Deleted the review");
 });
 
 app.get("*", async (request, response) => {
