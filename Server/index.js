@@ -1,13 +1,9 @@
-import { faker } from "@faker-js/faker";
 import express, { response } from "express";
 import logger from "morgan";
 
-function rand(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
 const app = express();
 const port = process.env.PORT || 80;
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

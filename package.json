@@ -8,7 +8,8 @@
     "doc": "docs"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,9 +22,14 @@
   },
   "homepage": "https://github.com/22alu/cs326-final-team7#readme",
   "dependencies": {
-    "@faker-js/faker": "^6.1.2",
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "morgan": "^1.10.0",
+    "pg": "^8.7.3",
     "url": "^0.11.0"
+  },
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
   }
 }

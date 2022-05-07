@@ -10,7 +10,7 @@ document.getElementById("courseBadge").innerText = courseName;
 const sortSelector = document.getElementById('sort');
 
 const ratings = await client.courseRatings(courseName, uniName);
-// const ratings = [{'user': 'Andy','rate': 4, 'description': "BEST CLASS EVER", 'university': "UMass"}, {'user': 'And','rate': 2, 'description': "WORST CLASS EVER", 'university': "UMass"}, {'user': 'An','rate': 3, 'description': "OKAYEST CLASS EVER", 'university': "UMass"}];
+// const ratings = [{'user': 'Andy','star': 4, 'description': "BEST CLASS EVER", 'university': "UMass"}, {'user': 'And','star': 2, 'description': "WORST CLASS EVER", 'university': "UMass"}, {'user': 'An','star': 3, 'description': "OKAYEST CLASS EVER", 'university': "UMass"}];
 
 function createRatingCard(rating){
     const cardRatings = document.getElementById("cardRatings");
@@ -34,7 +34,7 @@ function createRatingCard(rating){
     bodyStarCol.classList.add("courseStars");
     const rateContent = document.createElement("a");
     const rate = document.createElement("a");
-    rate.innerText = String(rating.rate) + "/5";
+    rate.innerText = String(rating.star) + "/5";
     const icon = document.createElement("i");
     icon.classList.add("bi");
     icon.classList.add("bi-star-fill");
@@ -65,7 +65,7 @@ sortSelector.addEventListener("change", function(event) {
 });
 
 function sortRatings(coef){
-    ratings.sort(function(x, y) { return coef * (parseInt(y.rate) - parseInt(x.rate)) });
+    ratings.sort(function(x, y) { return coef * (parseInt(y.star) - parseInt(x.star)) });
 }
 
 function displayRatings(){
@@ -80,39 +80,52 @@ document.getElementById("submitReview").addEventListener("click", submitButton);
 
 function submitButton(){
     document.getElementById("reviewSubmission").innerHTML = `
-    <form id="reviewForm">
-        <div class="form-group">
+    <form id="reviewForm" class="border border-primary submitForm">
+        <div class="form-group row formContent">
             <div class="col-sm-5">
-                <label for="userName">Your UserName:</label>
-                <input type="text" class="form-control" id="userName" placeholder="UserName" name="user">
+                <label for="userName">Your Display Name:</label>
+                <input type="text" class="form-control" id="userName" placeholder="Name" name="user">
+            </div>
+            <div class="col-sm-2">
+                <label for="star">Rating Stars:</label>
+                <input type="number" class="form-control input-sm" id="star" placeholder="0 to 5" max="5" min="0" name="star">
             </div>
         </div>
-        <div class="form-group row">
+        <div class="form-group row formContent">
             <div class="col-sm-5">
-                <label for="rating">Rating Stars:</label>
-                <input type="number" class="form-control" id="rating" placeholder="0 to 5" max="5" min="0" name="rating">
+                <label for="courseName">Course Name:</label>
+                <input type="text" class="form-control" id="courseName" placeholder="Course Name (e.g. Intro to ML)" name="courseName">
+            </div>
+            <div class="col-sm-5">
+                <label for="courseID">Course Number/ID:</label>
+                <input type="text" class="form-control" id="courseID" placeholder="Course ID (e.g. CS326)" name="courseID">
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group row formContent">
             <div class="col-sm-5">
+                <label for="uniName">University:</label>
+                <input type="text" class="form-control" id="uniName" placeholder="University Name" name="uniName">
+            </div>
+        </div>
+        <div class="form-group row formContent">
+            <div class="col-9">
                 <label for="description">Review Description:</label>
                 <textarea type="text" class="form-control" id="description" placeholder="Write your review here" name="desc"></textarea>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary submitBtn">Submit</button>
+        <button type="submit" class="btn btn-primary formSubmit">Submit</button>
     </form>`;
     document.getElementById("reviewForm").addEventListener("submit", async (e) => {
         e.preventDefault();
         const fd = new FormData(document.getElementById("reviewForm"));
-        if((fd.get("rating") !== '') && (fd.get("desc") !== '') && (fd.get('user') !== '')){
-            const ratingObj = {"rate": fd.get("rating"), "description": fd.get("desc"), 'university': uniName, 'user': fd.get('user')};
-            ratings.push(ratingObj);
-            sortRatings(1);
-            displayRatings();
+        if((fd.get("star") !== '') && (fd.get("desc") !== '') && (fd.get('user') !== '') && (fd.get('courseID') !== '') && (fd.get('uniName') !== '') && (fd.get('courseName') !== '')){
+            const ratingObj = {"star": fd.get("star"), "description": fd.get("desc"), 'userName': fd.get('user'), "courseID": fd.get("courseID"), "uniName": fd.get("uniName"), "courseName": fd.get("courseName")};
+            console.log(ratingObj);
             const response = await client.createReview(courseName, uniName, ratingObj);
             console.log(response);
-            document.getElementById("reviewSubmission").innerHTML = `<button type="button" class="btn btn-primary footerButtons submitBtn" id="submitReview"><i class="bi bi-pen"></i> &nbsp; Submit your own review! </button>`;
-            document.getElementById("submitReview").addEventListener("click", submitButton);
+            const sleep = ms => new Promise(r => setTimeout(r, ms));
+            await sleep(600);
+            location.reload();
         }
     });
 }
