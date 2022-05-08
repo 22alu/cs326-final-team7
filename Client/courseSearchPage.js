@@ -2,7 +2,7 @@ import * as client from './client.js';
 
 const url = window.location.href;
 const querry = new URLSearchParams(url.substring(url.indexOf('?'), url.length));
-const courseName = querry.get('courseName');
+const courseName = querry.get('course');
 const uniName = querry.get('uniName');
 
 document.getElementById("courseBadge").innerText = courseName;
@@ -10,7 +10,7 @@ document.getElementById("courseBadge").innerText = courseName;
 const sortSelector = document.getElementById('sort');
 
 const ratings = await client.courseRatings(courseName, uniName);
-// const ratings = [{'user': 'Andy','star': 4, 'description': "BEST CLASS EVER", 'university': "UMass"}, {'user': 'And','star': 2, 'description': "WORST CLASS EVER", 'university': "UMass"}, {'user': 'An','star': 3, 'description': "OKAYEST CLASS EVER", 'university': "UMass"}];
+// const ratings = [{'userName': 'Andy','rate': 4, 'description': "BEST CLASS EVER", 'university': "UMass"}, {'userName': 'And','rate': 2, 'description': "WORST CLASS EVER", 'university': "UMass"}, {'userName': 'An','rate': 3, 'description': "OKAYEST CLASS EVER", 'university': "UMass"}];
 
 function createRatingCard(rating){
     const cardRatings = document.getElementById("cardRatings");
@@ -24,7 +24,7 @@ function createRatingCard(rating){
     const cardHeader = document.createElement("p"); 
     cardHeader.classList.add("card-header");
     cardHeader.classList.add("text-dark");
-    cardHeader.innerText = rating.user + "'s Review:";
+    cardHeader.innerText = rating.userName + "'s Review:";
     const cardBody = document.createElement("div");
     cardBody.classList.add("card-body");
     const bodyRow = document.createElement("div");
@@ -34,7 +34,7 @@ function createRatingCard(rating){
     bodyStarCol.classList.add("courseStars");
     const rateContent = document.createElement("a");
     const rate = document.createElement("a");
-    rate.innerText = String(rating.star) + "/5";
+    rate.innerText = String(rating.rate) + "/5";
     const icon = document.createElement("i");
     icon.classList.add("bi");
     icon.classList.add("bi-star-fill");
@@ -65,7 +65,7 @@ sortSelector.addEventListener("change", function(event) {
 });
 
 function sortRatings(coef){
-    ratings.sort(function(x, y) { return coef * (parseInt(y.star) - parseInt(x.star)) });
+    ratings.sort(function(x, y) { return coef * (parseInt(y.rate) - parseInt(x.rate)) });
 }
 
 function displayRatings(){
@@ -82,13 +82,13 @@ function submitButton(){
     document.getElementById("reviewSubmission").innerHTML = `
     <form id="reviewForm" class="border border-primary submitForm">
         <div class="form-group row formContent">
-            <div class="col-sm-5">
+            <div class="col-sm-7">
                 <label for="userName">Your Display Name:</label>
-                <input type="text" class="form-control" id="userName" placeholder="Name" name="user">
+                <input type="text" class="form-control" id="userName" placeholder="Name (has to be same as User Name if you wish to later)" name="userName">
             </div>
             <div class="col-sm-2">
-                <label for="star">Rating Stars:</label>
-                <input type="number" class="form-control input-sm" id="star" placeholder="0 to 5" max="5" min="0" name="star">
+                <label for="rate">Rating Stars:</label>
+                <input type="number" class="form-control input-sm" id="rate" placeholder="0 to 5" max="5" min="0" name="rate">
             </div>
         </div>
         <div class="form-group row formContent">
@@ -118,11 +118,9 @@ function submitButton(){
     document.getElementById("reviewForm").addEventListener("submit", async (e) => {
         e.preventDefault();
         const fd = new FormData(document.getElementById("reviewForm"));
-        if((fd.get("star") !== '') && (fd.get("desc") !== '') && (fd.get('user') !== '') && (fd.get('courseID') !== '') && (fd.get('uniName') !== '') && (fd.get('courseName') !== '')){
-            const ratingObj = {"star": fd.get("star"), "description": fd.get("desc"), 'userName': fd.get('user'), "courseID": fd.get("courseID"), "uniName": fd.get("uniName"), "courseName": fd.get("courseName")};
-            console.log(ratingObj);
-            const response = await client.createReview(courseName, uniName, ratingObj);
-            console.log(response);
+        if((fd.get("rate") !== '') && (fd.get("desc") !== '') && (fd.get('userName') !== '') && (fd.get('courseID') !== '') && (fd.get('uniName') !== '') && (fd.get('courseName') !== '')){
+            const ratingObj = {"rate": fd.get("rate"), "desc": fd.get("desc"), 'userName': fd.get('userName'), "courseID": fd.get("courseID"), "uniName": fd.get("uniName"), "courseName": fd.get("courseName")};
+            const response = await client.createReview(ratingObj);
             const sleep = ms => new Promise(r => setTimeout(r, ms));
             await sleep(600);
             location.reload();

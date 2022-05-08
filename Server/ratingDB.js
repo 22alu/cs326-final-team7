@@ -34,13 +34,13 @@ export class RatingsTable {
   async init() {
     const queryText = `
       create table if not exists ratings (
-        id integer GENERATED ALWAYS AS IDENTITY primary key,
-        userName varchar(30),
-        description varchar(280),
-        star integer,
-        courseID varchar(15),
-        courseName varChar(30),
-        uniName varchar(30),
+        "id" integer GENERATED ALWAYS AS IDENTITY primary key,
+        "userName" varchar(30),
+        "description" varchar(280),
+        "rate" integer,
+        "courseID" varchar(15),
+        "courseName" varChar(30),
+        "uniName" varchar(30)
       );
     `;
     const res = await this.client.query(queryText);
@@ -52,45 +52,45 @@ export class RatingsTable {
     await this.pool.end();
   }
 
-  // Read uni names that start contain query
+  // Read uni names that ratet contain query
   async uniStartingWith(uniStart) {
     const queryVal = "%" + String(uniStart) + "%";
     const queryText =
-      'SELECT uniName FROM ratings WHERE (lower(uniName) LIKE ($1))';
+      'SELECT "uniName" FROM ratings WHERE ("uniName" LIKE ($1))';
     const res = await this.client.query(queryText, [queryVal]);
     return res.rows;
   }
 
-  // Read course names that start contain query
+  // Read course names that ratet contain query
   async courseNameStartingWith(nameStart) {
     const queryVal = "%" + String(nameStart) + "%";
     const queryText =
-      'SELECT courseName FROM ratings WHERE (lower(courseName) LIKE ($1))';
+      'SELECT "courseName" FROM ratings WHERE ("courseName" LIKE ($1))';
     const res = await this.client.query(queryText, [queryVal]);
     return res.rows;
   }
 
-  // Read course ids that start contain query
+  // Read course ids that ratet contain query
   async courseIDStartingWith(nameStart) {
     const queryVal = "%" + String(nameStart) + "%";
     const queryText =
-      'SELECT courseID FROM ratings WHERE (lower(courseID) LIKE ($1))';
+      'SELECT "courseID" FROM ratings WHERE ("courseID" LIKE ($1))';
     const res = await this.client.query(queryText, [queryVal]);
     return res.rows;
   }
 
   // INSERT a review entry into the table
-  async addGameScore(userName, desc, star, courseID, courseName, uniName) {
+  async addRating(userName, desc, rate, courseID, courseName, uniName) {
     const queryText =
-      'INSERT INTO ratings (userName, description, star, courseID, courseName, uniName) VALUES ($1, $2, $3, $4, $5, $6)';
-    const res = await this.client.query(queryText, [userName, desc, star, courseID, courseName, uniName]);
-    return res.rows;
+      'INSERT INTO ratings ("userName", "description", "rate", "courseID", "courseName", "uniName") VALUES ($1, $2, $3, $4, $5, $6)';
+    const res = await this.client.query(queryText, [userName, desc, rate, courseID, courseName, uniName]);
+    return res;
   }
 
   // Get all ratings from a user.
   async allUserRatings(user) {
     const queryText =
-      'SELECT * FROM ratings WHERE (userName LIKE ($1))';
+      'SELECT * FROM ratings WHERE ("userName" LIKE ($1))';
     const res = await this.client.query(queryText, [user]);
     return res.rows;
   }
@@ -98,7 +98,7 @@ export class RatingsTable {
   // Update Description of a rating
   async updateRating(ratingID, desc) {
     const queryText =
-      'UPDATE ratings description = ($1) WHERE (id LIKE ($2))';
+      'UPDATE ratings description = ($1) WHERE ("id" LIKE ($2))';
     const res = await this.client.query(queryText, [desc, ratingID]);
     return res.rows;
   }
@@ -106,8 +106,29 @@ export class RatingsTable {
   // Delete a rating from user
   async deleteRating(ratingID) {
     const queryText =
-      'DELETE FROM ratings WHERE (id like ($1))';
+      'DELETE FROM ratings WHERE ("id"=($1))';
     const res = await this.client.query(queryText, [ratingID]);
+    return res;
+  }
+
+  async ratingUnderCourse(courseID){
+    const queryText =
+      'SELECT * FROM ratings WHERE ("courseID" LIKE ($1))';
+    const res = await this.client.query(queryText, [courseID]);
+    return res.rows;
+  }
+
+  async ratingUnderUni(uniName){
+    const queryText =
+      'SELECT * FROM ratings WHERE ("uniName" LIKE ($1))';
+    const res = await this.client.query(queryText, [uniName]);
+    return res.rows;
+  }
+
+  async ratingUnderUser(userName){
+    const queryText =
+      'SELECT * FROM ratings WHERE ("userName" LIKE ($1))';
+    const res = await this.client.query(queryText, [userName]);
     return res.rows;
   }
 }

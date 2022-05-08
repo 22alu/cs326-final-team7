@@ -150,7 +150,7 @@ function renderReview(review, id){
     courseName.innerText = "Course: " + review.courseName;
     
     let rating = document.createElement("p");
-    rating.innerText = "Rating: " + review.rating;
+    rating.innerText = "Rating: " + review.rate;
 
     let university = document.createElement("p");
     university.innerText = "University: " + review.uniName;
@@ -161,7 +161,7 @@ function renderReview(review, id){
     comment.setAttribute("id", "comment"+id);
     comment.setAttribute("rows", 3);
     comment.disabled = true;
-    comment.innerText = review.comment;
+    comment.innerText = review.description;
 
     //create edit + delete buttons
     let edit = document.createElement("button");
@@ -203,7 +203,7 @@ async function saveReview(element){
     let id = element.id;
     id = parseInt(id.substring(6));
     let myRev = myReviews[id];
-    myRev.comment = document.getElementById("comment"+id).value;
+    myRev.description = document.getElementById("comment"+id).value;
     myReviews[id] = myRev;
     const response = await client.updateReviews(oldReviews, myReviews);
     document.getElementById("allReviews").innerText = "";

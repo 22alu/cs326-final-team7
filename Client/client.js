@@ -1,7 +1,7 @@
-export async function courseRatings(courseName, uniName) {
+export async function courseRatings(courseID, uniName) {
     try {
         const response = await fetch(
-            `/courseRatings?course=${courseName}&uniName=${uniName}`,
+            `/courseRatings?course=${courseID}`,
             {
                 method: "GET",
             }
@@ -107,16 +107,15 @@ export async function updateReviews(userName, newReviews) {
   return data;
 }
 
-export async function createReview(courseName, uniName, rating) {
+export async function createReview(rating) {
+    console.log(rating);
     const response = await fetch(`/createReview`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            courseName: courseName,
-            uniName: uniName,
-            rating: rating,
+            ratingObj: rating,
         }),
     });
     const data = await response.json();

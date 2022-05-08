@@ -108,10 +108,8 @@ const courseRender = (course) => {
     const linkNode = document.createElement("a");
     linkNode.setAttribute(
         "href",
-        "courseSearchPage.html?courseName=" +
-            course.courseNumber +
-            "&uniName=" +
-            uniName
+        "courseSearchPage.html?course=" +
+            course.courseNumber
     );
     linkNode.classList.add("cardLink");
     linkNode.appendChild(cardDiv);

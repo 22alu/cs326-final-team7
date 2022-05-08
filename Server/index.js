@@ -1,8 +1,14 @@
 import express, { response } from "express";
 import logger from "morgan";
+import { RatingsTable } from "./ratingDB.js";
 
 const app = express();
 const port = process.env.PORT || 80;
+
+const dburl = process.env.DATABASE_URL;
+
+const db = new RatingsTable(dburl);
+await db.connect();
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -10,47 +16,40 @@ app.use(express.urlencoded({ extended: false }));
 app.use("/client", express.static("Client"));
 
 app.get('/courseRatings', async (request, response) => {
-    const options = request.body;
-    const r = rand(5,10);
-    let fakeData = [];
-    for(let i = 0; i < r; i++){
-        let obj = {};
-        obj['user'] = faker.name.firstName();
-        obj['rate'] = faker.datatype.number({min: 0, max: 5});
-        obj['description'] = faker.random.words(rand(5,15));
-        fakeData.push(obj);
-    }
-    response.json(fakeData);
+    const options = request.query;
+    const data = await db.ratingUnderCourse(options.course);
+    response.json(data);
 });
 
+function uniRatingsHelper(data){
+    let courses = {};
+    let courseSet = new Set();
+    data.forEach(e => {
+        const data = courses[e.courseID] || {'courseNumber' : e.courseID, 'courseName' : e.courseName, 'numRatings' : 0, 'overallRating' : 0};
+        data.numRatings += 1;
+        data.overallRating += e.rate; 
+        courses[e.courseID] = data;
+        courseSet.add(e.courseID);
+    });
+    let courseList = [];
+    courseSet.forEach((e) => { 
+        const data = courses[e];
+        data.overallRating = data.overallRating / data.numRatings;
+        courseList.push(data);
+    });
+    return courseList;
+}
+
 app.get('/uniRatings', async (request, response) => {
-    const options = request.body;
-    const r = rand(5,10);
-    let fakeData = [];
-    for(let i = 0; i < r; i++){
-        let obj = {};
-        obj['courseNumber'] = faker.random.alpha({ count: 2, upcase: true,}) + faker.datatype.number({min: 100, max: 999});
-        obj['courseName'] = faker.company.catchPhrase();
-        obj['numRatings'] = faker.datatype.number({min: 1, max: 100});
-        obj['overallRating'] = Math.round(Math.random() * 5 * 10) / 10;
-        fakeData.push(obj);
-    }
-    response.json(fakeData);
+    const options = request.query;
+    const data = await db.ratingUnderUni(options.uniName);
+    response.json(uniRatingsHelper(data));
 });
 
 app.get('/userRatings', async (request, response) => {
     const options = request.body;
-    const r = rand(5, 10);
-    let fakeData = [];
-    for(let i = 0; i < r; i++){
-        let obj = {};
-        obj['uniName'] = faker.random.words(2);
-        obj['courseName'] = faker.company.catchPhrase();
-        obj['rating'] = Math.round(Math.random() * 5 * 10) / 10;
-        obj['comment'] = faker.random.words(rand(5,15));
-        fakeData.push(obj);
-    }
-    response.json(fakeData);
+    const data = await db.ratingUnderUser(options.username);
+    response.json(data);
 });
 
 app.put('/updateUser', async (request, response) => {
@@ -66,23 +65,19 @@ app.put('/updateReviews', async (request, response) => {
 });
 
 app.get('/unis', async (request, response) => {
-    const options = request.body;
-    const r = rand(2,7);
-    let fakeData = []
-    for(let i = 0; i < r; i++){
-        fakeData.push(request.query.query.toUpperCase() + ' ' + faker.random.words(rand(0,2)));
-    }
-    response.json(fakeData);
+    const options = request.query;
+    const data = await db.uniStartingWith(options.query);
+    let retList = [];
+    data.forEach(e => retList.push(e.uniName));
+    response.json(retList);
 });
 
 app.get('/courses', async (request, response) => {
-    const options = request.body;
-    const r = rand(2,7);
-    let fakeData = []
-    for(let i = 0; i < r; i++){
-        fakeData.push(request.query.courseName.toUpperCase() + ' ' + faker.company.catchPhrase());
-    }
-    response.json(fakeData);
+    const options = request.query;
+    const data = await db.courseIDStartingWith(options.courseName);
+    let retList = [];
+    data.forEach(e => retList.push(e.courseID));
+    response.json(retList);
 });
 
 app.get('/userProfile', async (request, response) => {
@@ -95,9 +90,9 @@ app.get('/userProfile', async (request, response) => {
 })
 
 app.post('/createReview', async (request, response) => {
-    const options = request.body;
-    console.log("Created a new review");
-    response.json("Created a new review");
+    const options = request.body.ratingObj;
+    const data = await db.addRating(options.userName, options.desc, options.rate, options.courseID, options.courseName, options.uniName);
+    response.json("Added New Review");
 });
 
 app.delete('/deleteReview', async (request, response) => {
