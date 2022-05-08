@@ -134,3 +134,30 @@ export async function uniRatings(uniName) {
         console.log(err);
     }
 }
+
+export async function verifyUser(userName) {
+    try {
+        const response = await fetch(`/login?userName=${userName}`, {
+            method: "GET",
+        });
+        const data = await response.json();
+        return data;
+    } catch (err) {
+        console.log(err);
+    }
+}
+
+export async function registerUser(userName, password) {
+    const response = await fetch(`/register`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            userName: userName,
+            password: password,
+        }),
+    });
+    const data = await response.json();
+    return data;
+}

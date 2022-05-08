@@ -1,8 +1,13 @@
 import express, { response } from "express";
+import { RatingsTable } from "./ratingDB";
 import logger from "morgan";
 
 const app = express();
 const port = process.env.PORT || 80;
+
+const dburl = process.env.DATABASE_URL;
+let db = new RatingsTable(dburl);
+await db.connect();
 
 app.use(logger("dev"));
 app.use(express.json());
@@ -106,9 +111,21 @@ app.delete('/deleteReview', async (request, response) => {
     response.json("Deleted the review");
 });
 
+app.post('/register', async (request, response) => {
+    const options = request.body;
+    await db.registerUser(options.userName, options.password);
+    response.status(200).send(`200 OK`);
+});
+
+app.get('/login', async (request, response) => {
+    const userName = request.query;
+    const res = await db.attemptLogin(userName);
+    response.send(JSON.stringify(res));
+});
+
 app.get('/', async (request, response) =>{
     response.redirect('/Client/index.html');
-})
+});
 
 app.get("*", async (request, response) => {
     response.status(404).send(`Not found: ${request.path}`);
