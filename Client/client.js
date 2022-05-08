@@ -135,13 +135,17 @@ export async function uniRatings(uniName) {
     }
 }
 
-export async function verifyUser(userName) {
+export async function verifyUser(userName, password) {
     try {
         const response = await fetch(`/login?userName=${userName}`, {
             method: "GET",
         });
         const data = await response.json();
-        return data;
+        if(data === password){
+            return true;
+        } else {
+            return false;
+        }
     } catch (err) {
         console.log(err);
     }
