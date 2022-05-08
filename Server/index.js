@@ -1,4 +1,5 @@
 import express, { response } from "express";
+import { RatingsTable } from "./ratingDB";
 import logger from "morgan";
 import { RatingsTable } from "./ratingDB.js";
 
@@ -101,9 +102,21 @@ app.delete('/deleteReview', async (request, response) => {
     response.json("Deleted the review");
 });
 
+app.post('/register', async (request, response) => {
+    const options = request.body;
+    await db.registerUser(options.userName, options.password);
+    response.status(200).send(`200 OK`);
+});
+
+app.get('/login', async (request, response) => {
+    const userName = request.query;
+    const res = await db.attemptLogin(userName);
+    response.send(JSON.stringify(res));
+});
+
 app.get('/', async (request, response) =>{
     response.redirect('/Client/index.html');
-})
+});
 
 app.get("*", async (request, response) => {
     response.status(404).send(`Not found: ${request.path}`);

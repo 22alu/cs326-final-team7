@@ -2,23 +2,20 @@ import * as client from './client.js';
 
 //empty array of reviews, empty string username.
 let myReviews = [];
-let orig_user = {};
+//let orig_user = {};
 
 //demo profile, however we use fakedata. by default the user is logged out.
-loadProfile("Andy");
+//loadProfile("Andy");
 
 //activate login/logout buttons. activate edit-profile button (though by default this is hidden)
 document.getElementById("log").addEventListener("click", login);
-document.getElementById("profileEdit").addEventListener("click", updateProfile);
+
+//document.getElementById("profileEdit").addEventListener("click", updateProfile);
 
 //function to load the profile page.
 async function loadProfile(username){
     //get profile information
     let user = await client.userProfile(username);
-    orig_user = user;
-    let myname = user.username;
-    let email = user.email;
-    let password = user.password;
     myReviews = await client.userRatings(username);
 
     //display reviews.
@@ -31,10 +28,11 @@ async function loadProfile(username){
         logout();
     }
 
-    //fill in info. not displayed when logged out but still not secure, to be fixed later
+    /* removed.
     document.getElementById("UserNameInputBox").value = myname;
     document.getElementById("emailInputBox").value = email;
     document.getElementById("passwordInputBox").value = password;
+    */
 
     return;
 }
@@ -43,12 +41,12 @@ async function loadProfile(username){
 function logout(){
     window.localStorage.setItem("login", "false");
     document.getElementById("welcomeUser").innerText = orig_user.username + "'s Profile";
-    document.getElementById("UserNameInputBox").style.display = "none";
-    document.getElementById("userLabel").style.display = "none";
-    document.getElementById("emailInputBox").style.display = "none";
-    document.getElementById("emailLabel").style.display = "none";
-    document.getElementById("passwordInputBox").style.display = "none";
-    document.getElementById("pwLabel").style.display = "none";
+//    document.getElementById("UserNameInputBox").style.display = "none";
+//    document.getElementById("userLabel").style.display = "none";
+//    document.getElementById("emailInputBox").style.display = "none";
+//    document.getElementById("emailLabel").style.display = "none";
+//    document.getElementById("passwordInputBox").style.display = "none";
+//    document.getElementById("pwLabel").style.display = "none";
     document.getElementById("commentHeader").innerText = orig_user.username + "'s Reviews";
     document.getElementById("profileEdit").style.display = "none";
     document.getElementById("log").innerText = "Log In";
@@ -62,21 +60,22 @@ function logout(){
 function login(){
     window.localStorage.setItem("login", "true");
     document.getElementById("welcomeUser").innerText = "Welcome " + orig_user.username;
-    document.getElementById("UserNameInputBox").style.display = "block";
-    document.getElementById("userLabel").style.display = "block";
-    document.getElementById("emailInputBox").style.display = "block";
-    document.getElementById("emailLabel").style.display = "block";
-    document.getElementById("passwordInputBox").style.display = "block";
-    document.getElementById("pwLabel").style.display = "block";
+//    document.getElementById("UserNameInputBox").style.display = "block";
+//    document.getElementById("userLabel").style.display = "block";
+//    document.getElementById("emailInputBox").style.display = "block";
+//    document.getElementById("emailLabel").style.display = "block";
+//    document.getElementById("passwordInputBox").style.display = "block";
+//    document.getElementById("pwLabel").style.display = "block";
     document.getElementById("commentHeader").innerText = "Your Reviews:";
-    document.getElementById("profileEdit").style.display = "block";
+//    document.getElementById("profileEdit").style.display = "block";
     document.getElementById("log").innerText = "Log Out";
     document.getElementById("log").addEventListener("click", logout);
     document.getElementById("log").removeEventListener("click", login);
-    toggleReviewButtons();
+//    toggleReviewButtons();
     return;
 }
 
+//unused function, edit privileges removed.
 function toggleReviewButtons(){
     for(let count in myReviews){
         if(window.localStorage.getItem("login") === "true"){
@@ -89,8 +88,8 @@ function toggleReviewButtons(){
     }
 }
 
-//change profile info
-function updateProfile(){
+//unused function, profile edit removed.
+/*function updateProfile(){
     //enable input boxes
     let username = document.getElementById("UserNameInputBox");
     username.disabled = false;
@@ -104,9 +103,9 @@ function updateProfile(){
     editButton.innerText = "Save";
     editButton.removeEventListener("click", updateProfile);
     editButton.addEventListener("click", saveProfile);
-}
+}*/
 
-//save profile info
+/*unused function, save profile info removed.
 async function saveProfile(){
     //verify
     let mypass = window.prompt("Please input your current password to verify this change.");
@@ -138,7 +137,7 @@ async function saveProfile(){
         window.alert("Incorrect password. Please try again.");
     }
     return;
-}
+}*/
 
 //display a single review
 function renderReview(review, id){
@@ -186,6 +185,8 @@ function renderReview(review, id){
     return theReview;
 }
 
+
+/*review edit and save removed.
 function editReview(element){
     element.innerText = "Save";
     element.removeEventListener("click", function() { editReview(this)});
@@ -209,7 +210,7 @@ async function saveReview(element){
     document.getElementById("allReviews").innerText = "";
     loadReviews(document.getElementById("allReviews"));
     return;
-}
+}*/
 
 async function loadReviews(element){
     element.innerText = "";
@@ -222,6 +223,7 @@ async function loadReviews(element){
     return;
 }
 
+/*delete review removed.
 async function deleteReview(element){
     let id = element.id;
     id = parseInt(id.substring(6));
@@ -230,7 +232,7 @@ async function deleteReview(element){
     document.getElementById("allReviews").innerText = "";
     loadReviews(document.getElementById("allReviews"));
     return;
-}
+}*/
 
 document.getElementById("smallSearch").addEventListener("click", () => {
     redirectToResults(document.getElementById("smallInput").value);

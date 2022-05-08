@@ -42,6 +42,11 @@ export class RatingsTable {
         "courseName" varChar(30),
         "uniName" varchar(30)
       );
+
+      create table if not exists users (
+        "userName" varchar(30) primary key,
+        "password" varchar(30),
+      );
     `;
     const res = await this.client.query(queryText);
   }
@@ -52,7 +57,28 @@ export class RatingsTable {
     await this.pool.end();
   }
 
-  // Read uni names that ratet contain query
+  // Register username and password
+  async registerUser(username, password) {
+    const queryText = 'INSERT INTO users ("userName", password) VALUES ($1, $2)';
+    const res = await this.client.query(queryText, [username, password]);
+    return res.rows;
+  }
+
+  // Return user if exists
+  async findUser(username) {
+    const queryText = 'SELECT "userName" FROM users WHERE "userName" = $1';
+    const res = await this.client.query(queryText, [username]);
+    return res.rows;
+  }
+
+  // Return password
+  async attemptLogin(username) {
+    const queryText = 'SELECT password FROM users WHERE "userName" = $1';
+    const res = await this.client.query(queryText, [username]);
+    return res.rows;
+  }
+
+  // Read uni names that contains query
   async uniStartingWith(uniStart) {
     const queryVal = "%" + String(uniStart) + "%";
     const queryText =
