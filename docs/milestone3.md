@@ -19,8 +19,8 @@
 
 # Divison of labor
 
-### Andy LU:
-
+### Andy Lu:
+Implemented database table and CRUD operations involving account registration and authentication. Filled out routing functions involving these CRUD operations. Created registration page.
 
 ### Jeffrey Wong:
 
