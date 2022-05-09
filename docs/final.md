@@ -120,31 +120,20 @@ APIs: A final up-to-date list/table describing your application’s API
 
 URL Routes/Mappings: A final up-to-date table of all the URL routes that your application supports and a short description of what those routes are used for. You should also indicate any authentication and permissions on those routes.
 
-/login
+/ -> /index.html
+Directs to main landing page.
 
-/profilepage
+/profilepage -> /Client/profilepage.html?user='', /Client/login.html
+Directs to the user profile page if user is logged in; directs to login page otherwise.
 
-/logout
+/login -> /Client/login.html, /Client/profilepage.html?user=''
+Directs to the login page if user is not logged in; directs to user profile page otherwise.
 
-/register
+/logout -> /login.html
+Upon successful logout, redirects to the login page.
 
-/courseRatings
-
-/uniRatings
-
-/userRatings
-
-/updateReviews
-
-/unis
-
-/courses
-
-/userProfile
-
-/createReview
-
-/deleteReview
+/register -> /Client/register.html, /Client/login.html
+Directs to user registration page if user is not logged in or registering; directs to login page upon successful registration.
 
 # Authentication/Authorization
 
