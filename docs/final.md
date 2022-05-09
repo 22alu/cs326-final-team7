@@ -162,7 +162,7 @@ Worked on html for home page, course search page, and user registration page. Im
 
 
 ### Manay Patel
-
+Implemented front end and back end for the University Search page. Deployed the app on Heroku and assisted in creating the datbase/change routing functions.
 
 ### Muhammad Shah
 
