@@ -161,7 +161,7 @@ Division of Labor: A breakdown of the division of labor for each team member —
 
 
 ### Manay Patel
-
+Implemented front end and back end for the University Search page. Deployed the app on Heroku and assisted in creating the datbase/change routing functions.
 
 ### Muhammad Shah
 
