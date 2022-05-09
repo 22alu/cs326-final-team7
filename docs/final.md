@@ -27,81 +27,94 @@ User Interface: A final up-to-date list/table describing your application’s us
 APIs: A final up-to-date list/table describing your application’s API
 
 1. Home Page
+    ![alt text](./final_images/homepage.PNG)
 
-2. User Profile
+2. Log In
+    ![alt text](./final_images/login.PNG)
 
-3. Course Search
+3. Registration
+    ![alt text](./final_images/register.PNG)
 
-4. University Search
+4. User Profile
+    ![alt text](./final_images/profilepage.PNG)
 
-5. Search Results
+5. Search Results - All results of a search query
+    ![alt text](./final_images/searchresults.PNG)
+    
+6. Course Search - Course Page that shows all reviews in that course
+    ![alt text](./final_images/coursesearchpage.PNG)
 
-6. Registration
+7. University Search - Uni Page that shows all courses in that uni
+    ![alt text](./final_images/unisearchpage.PNG)
+
+8. Create Review - Create your own review form
+    ![alt text](./final_images/createreview.PNG)
 
 # APIs
 
 1. courseRatings
-    -GET
-    -Parameters: courseID, uniName
-    -Returns a list of all course ratings for a given course at the specified university.
+    - GET
+    - Parameters: courseID, uniName
+    - Returns a list of all course ratings for a given course at the specified university.
 
 2. uniList
-    -GET
-    -Parameters: query
-    -Returns a list of all courses with at least one existing review at a specified university.
+    - GET
+    - Parameters: query
+    - Returns a list of all courses with at least one existing review at a specified university.
 
 3. courseList
-    -GET
-    -Parameters: courseName
-    -Returns all courses with names similar to the given course name.
+    - GET
+    - Parameters: courseName
+    - Returns all courses with names similar to the given course name.
 
 4. userRatings
-    -GET
-    -Parameters: username
-    -Returns all reviews made by the specified account.
+    - GET
+    - Parameters: username
+    - Returns all reviews made by the specified account.
 
-5. userProfile
-    -GET
-    -Parameters: username
-    -Returns all information associated with the specified account.
+5. updateUser
+    - PUT
+    - Parameters: username, newuser, email, password
+    - Updates information associated with a specific account.
 
-6. updateUser
-    -PUT
-    -Parameters: username, newuser, email, password
-    -Updates information associated with a specific account.
+6. deleteReview
+    - DELETE
+    - Parameters: id
+    - Deletes a given review.
 
-7. deleteReview
-    -DELETE
-    -Parameters: id
-    -Deletes a given review.
+7. updateReviews
+    - PUT
+    - Parameters: id, desc
+    - Edits the content of a given review.
 
-8. updateReviews
-    -PUT
-    -Parameters: id, desc
-    -Edits the content of a given review.
+8. createReview
+    - POST
+    - Parameters: rating
+    - Creates a review.
 
-9. createReview
-    -POST
-    -Parameters: rating
-    -Creates a review.
-
-10. uniRatings
-    -GET
-    -Parameters: uniname
-    -
-
-11. verifyUser
-    -GET
-    -Parameters: userName, password
-    -Given a username and a password, returns true if the password is correct and false otherwise.
-
-12. registerUser
-    -POST
-    -Parameters: userName, password
+9.  uniRatings
+    - GET
+    - Parameters: uniname
+    - All ratings under a uni
 
 # Database
 
-Database: A final up-to-date representation of your database including a brief description of each of the entities in your data model and their relationships if any.
+### Ratings Table
+| Column       | Data Type | Description              |
+|--------------|-----------|--------------------------|
+| id           | integer   | id of the review created |
+| userName     | String    | name of the creating user|
+| description  | String    | description of the rating|
+| rate         | integer   | number of stars out of 5 |
+| uniName      | String    | Name of the uni of rating|
+| courseName   | String    | Name of the course       |
+| courseID     | String    | courseID string (eg CS326)|
+
+### User Table
+| Column       | Data Type | Description              |
+|--------------|-----------|--------------------------|
+| userName     | String    | User’s userName          |
+| password 	   | String    | User’s Password          |
 
 # URL Routes/Mappings
 
@@ -137,7 +150,7 @@ URL Routes/Mappings: A final up-to-date table of all the URL routes that your ap
 
 Authentication/Authorization: A final up-to-date description of how users are authenticated and any permissions for specific users (if any) that you used in your application. You should mention how they relate to which UI views are accessible.
 
-Users may register an account through the registration page and be authenticated through the login process. Upon logging in, users will be able to create and edit reviews for courses.
+Users may register an account through the registration page and be authenticated through the login process. Upon logging in, users will be able to edit reviews for courses they have made.
 
 # Division of Labor
 
