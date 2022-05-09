@@ -123,7 +123,6 @@ app.get('/userRatings', async (request, response) => {
 
 app.put('/updateReviews', async (request, response) => {
     const {id, desc} = request.body;
-    console.log(id, desc);
     await db.updateRating(id, desc);
     response.json("Updated User Reviews");
 });

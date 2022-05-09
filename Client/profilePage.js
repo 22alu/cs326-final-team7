@@ -13,29 +13,15 @@ async function loadProfile(username){
     //get profile information
     myReviews = await client.userRatings(username);
     //display reviews.
-    console.log(myReviews);
+    document.getElementById("welcomeUser").innerText = "Welcome " + orig_user.username;
+    document.getElementById("commentHeader").innerText = "Your Reviews:";
     await loadReviews(document.getElementById("allReviews"));
-    return;
-}
-
-//toggle visibility + usage of login/out button
-function logout(){
-    window.localStorage.setItem("login", "false");
-    document.getElementById("welcomeUser").innerText = orig_user.username + "'s Profile";
-    document.getElementById("commentHeader").innerText = orig_user.username + "'s Reviews";
-    document.getElementById("profileEdit").style.display = "none";
-    document.getElementById("log").innerText = "Log In";
-    document.getElementById("log").removeEventListener("click", logout);
-    document.getElementById("log").addEventListener("click", login);
-    toggleReviewButtons();
     return;
 }
 
 //toggle visibility + usage of login/out button
 function login(){
     window.localStorage.setItem("login", "true");
-    document.getElementById("welcomeUser").innerText = "Welcome " + orig_user.username;
-    document.getElementById("commentHeader").innerText = "Your Reviews:";
     document.getElementById("log").innerText = "Log Out";
     document.getElementById("log").addEventListener("click", logout);
     document.getElementById("log").removeEventListener("click", login);
@@ -111,7 +97,6 @@ function editReview(element){
 
     let id = element.parentElement.id;
     id = parseInt(id.substring(6));
-    console.log(id);
     let comment = document.getElementById("comment"+id);
     comment.disabled = false;
     return;
@@ -121,7 +106,6 @@ async function saveReview(element){
     let id = element.id;
     id = parseInt(id.substring(6));
     const description = document.getElementById("comment"+id).value;
-    console.log(description)
     const response = await client.updateReviews(id, description);
     location.reload();
     return;

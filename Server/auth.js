@@ -12,16 +12,13 @@ const strategy = new Strategy(async (username, password, done) => {
   const findUser = await users.findUser(username);
   if (!findUser) {
     // no such user
-    console.log("no such user");
     return done(null, false, { message: 'Wrong username' });
   }
   const validate = await users.validatePassword(username, password);
-  console.log(validate);
   if (!validate) {
     // invalid password
     // should disable logins after N messages
     // delay return to rate-limit brute-force attacks
-    console.log("not validated");
     await new Promise((r) => setTimeout(r, 1500)); // two second delay
     return done(null, false, { message: 'Wrong password' });
   }
