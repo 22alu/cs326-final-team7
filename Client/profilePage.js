@@ -2,76 +2,30 @@ import * as client from './client.js';
 
 //empty array of reviews, empty string username.
 let myReviews = [];
-//let orig_user = {};
+const url = window.location.href;
+const querry = new URLSearchParams(url.substring(url.indexOf("?"), url.length));
+let orig_user = {'username': querry.get("user")};
 
-//demo profile, however we use fakedata. by default the user is logged out.
-//loadProfile("Andy");
-
-//activate login/logout buttons. activate edit-profile button (though by default this is hidden)
-document.getElementById("log").addEventListener("click", login);
-
-//document.getElementById("profileEdit").addEventListener("click", updateProfile);
+loadProfile(orig_user.username);
 
 //function to load the profile page.
 async function loadProfile(username){
     //get profile information
-    let user = await client.userProfile(username);
     myReviews = await client.userRatings(username);
-
     //display reviews.
+    document.getElementById("welcomeUser").innerText = "Welcome " + orig_user.username;
+    document.getElementById("commentHeader").innerText = "Your Reviews:";
     await loadReviews(document.getElementById("allReviews"));
-
-    //check if logged in/out. update html
-    if(window.localStorage.getItem("login") === "true"){
-        login();
-    }else{
-        logout();
-    }
-
-    /* removed.
-    document.getElementById("UserNameInputBox").value = myname;
-    document.getElementById("emailInputBox").value = email;
-    document.getElementById("passwordInputBox").value = password;
-    */
-
-    return;
-}
-
-//toggle visibility + usage of login/out button
-function logout(){
-    window.localStorage.setItem("login", "false");
-    document.getElementById("welcomeUser").innerText = orig_user.username + "'s Profile";
-//    document.getElementById("UserNameInputBox").style.display = "none";
-//    document.getElementById("userLabel").style.display = "none";
-//    document.getElementById("emailInputBox").style.display = "none";
-//    document.getElementById("emailLabel").style.display = "none";
-//    document.getElementById("passwordInputBox").style.display = "none";
-//    document.getElementById("pwLabel").style.display = "none";
-    document.getElementById("commentHeader").innerText = orig_user.username + "'s Reviews";
-    document.getElementById("profileEdit").style.display = "none";
-    document.getElementById("log").innerText = "Log In";
-    document.getElementById("log").removeEventListener("click", logout);
-    document.getElementById("log").addEventListener("click", login);
-    toggleReviewButtons();
     return;
 }
 
 //toggle visibility + usage of login/out button
 function login(){
     window.localStorage.setItem("login", "true");
-    document.getElementById("welcomeUser").innerText = "Welcome " + orig_user.username;
-//    document.getElementById("UserNameInputBox").style.display = "block";
-//    document.getElementById("userLabel").style.display = "block";
-//    document.getElementById("emailInputBox").style.display = "block";
-//    document.getElementById("emailLabel").style.display = "block";
-//    document.getElementById("passwordInputBox").style.display = "block";
-//    document.getElementById("pwLabel").style.display = "block";
-    document.getElementById("commentHeader").innerText = "Your Reviews:";
-//    document.getElementById("profileEdit").style.display = "block";
     document.getElementById("log").innerText = "Log Out";
     document.getElementById("log").addEventListener("click", logout);
     document.getElementById("log").removeEventListener("click", login);
-//    toggleReviewButtons();
+   toggleReviewButtons();
     return;
 }
 
@@ -87,57 +41,6 @@ function toggleReviewButtons(){
         }
     }
 }
-
-//unused function, profile edit removed.
-/*function updateProfile(){
-    //enable input boxes
-    let username = document.getElementById("UserNameInputBox");
-    username.disabled = false;
-    let email = document.getElementById("emailInputBox");
-    email.disabled = false;
-    let password = document.getElementById("passwordInputBox");
-    password.disabled = false;
-
-    //toggle functionality of edit/save button
-    let editButton = document.getElementById("profileEdit");
-    editButton.innerText = "Save";
-    editButton.removeEventListener("click", updateProfile);
-    editButton.addEventListener("click", saveProfile);
-}*/
-
-/*unused function, save profile info removed.
-async function saveProfile(){
-    //verify
-    let mypass = window.prompt("Please input your current password to verify this change.");
-
-    if(mypass === orig_user.password){
-        //get new or unchanged properties
-        let username = document.getElementById("UserNameInputBox");
-        let email = document.getElementById("emailInputBox");
-        let password = document.getElementById("passwordInputBox");
-
-        //change backend info for user, update global user variable
-        const response = await client.updateUser(orig_user.username, username.value, email.value, password.value);
-        orig_user = await client.userProfile(username.value);
-
-        //reload profile
-        loadProfile(username.value);
-
-        //toggle edit/save button
-        let editButton = document.getElementById("profileEdit");
-        editButton.innerText = "Edit";
-        editButton.addEventListener("click", updateProfile);
-        editButton.removeEventListener("click", saveProfile);
-
-        //disable input boxes
-        username.disabled = true;
-        email.disabled = true;
-        password.disabled = true;
-    }else{
-        window.alert("Incorrect password. Please try again.");
-    }
-    return;
-}*/
 
 //display a single review
 function renderReview(review, id){
@@ -186,7 +89,7 @@ function renderReview(review, id){
 }
 
 
-/*review edit and save removed.
+
 function editReview(element){
     element.innerText = "Save";
     element.removeEventListener("click", function() { editReview(this)});
@@ -200,39 +103,33 @@ function editReview(element){
 }
 
 async function saveReview(element){
-    let oldReviews = JSON.parse(JSON.stringify(myReviews));
     let id = element.id;
     id = parseInt(id.substring(6));
-    let myRev = myReviews[id];
-    myRev.description = document.getElementById("comment"+id).value;
-    myReviews[id] = myRev;
-    const response = await client.updateReviews(oldReviews, myReviews);
-    document.getElementById("allReviews").innerText = "";
-    loadReviews(document.getElementById("allReviews"));
+    const description = document.getElementById("comment"+id).value;
+    const response = await client.updateReviews(id, description);
+    location.reload();
     return;
-}*/
+}
 
 async function loadReviews(element){
     element.innerText = "";
     myReviews = await client.userRatings(orig_user.username);
     for (let i = 0; i < myReviews.length; i++){
         if(myReviews[i] != null){
-            element.appendChild(renderReview(myReviews[i], i));
+            element.appendChild(renderReview(myReviews[i], myReviews[i].id));
         }
     }
     return;
 }
 
-/*delete review removed.
+
 async function deleteReview(element){
     let id = element.id;
     id = parseInt(id.substring(6));
-    const response = await client.deleteReview(orig_user.username, myReviews[id]);
-    delete myReviews[id];
-    document.getElementById("allReviews").innerText = "";
-    loadReviews(document.getElementById("allReviews"));
+    const response = await client.deleteReview(id);
+    location.reload();
     return;
-}*/
+}
 
 document.getElementById("smallSearch").addEventListener("click", () => {
     redirectToResults(document.getElementById("smallInput").value);

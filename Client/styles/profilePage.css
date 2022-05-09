@@ -42,6 +42,13 @@
     width: 40rem;
 }
 
+.logOutBtn {
+    font-size: larger;
+    margin-left: 5%;
+    margin-bottom: 5%;
+    margin-top: 1%;
+}
+
 a,
 a:link,
 a:visited,

@@ -84,7 +84,7 @@ const courseRender = (course) => {
 
     const rateContent = document.createElement("a");
     const rate = document.createElement("a");
-    rate.innerHTML = course.overallRating;
+    rate.innerHTML = course.overallRating.toFixed(1);
 
     const icon = document.createElement("i");
     icon.classList.add("bi");
@@ -128,6 +128,5 @@ document.getElementById("smallSearch").addEventListener("click", () => {
 });
 
 function redirectToResults(querry){
-    console.log(querry);
     window.location.href = "resultsPage.html?search=" + querry;
 }
