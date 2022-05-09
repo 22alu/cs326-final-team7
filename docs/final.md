@@ -23,32 +23,43 @@ Jeffrey Wong - notjwong
 
 # User Interface
 
-User Interface: A final up-to-date list/table describing your application’s user interface. This should include the name of the UI view and its purpose. You should include a screenshot of each of your UI views.
-APIs: A final up-to-date list/table describing your application’s API
+All pages contain a search bar to allow users to conduct searches, and a profile page button which allows users to either access their profile or attempt login.
 
 1. Home Page
     ![alt text](./final_images/homepage.PNG)
+    The above image displays the landing page, which provides some information about the website.
 
 2. Log In
     ![alt text](./final_images/login.PNG)
+    The above image displays the login page. Accessible only to users who are not logged in, users can either log in or click a link to create an account if they do not already have one.
 
 3. Registration
     ![alt text](./final_images/register.PNG)
+    The above image displays the registration page, where new users can create an account with a username and password.
 
 4. User Profile
     ![alt text](./final_images/profilepage.PNG)
+    The above image displays the user profile page. Accessible only by users who have logged in, this displays all the reviews a given user has created and allows the user to edit or delete their reviews.
 
-5. Search Results - All results of a search query
+
+5. Search Results
     ![alt text](./final_images/searchresults.PNG)
+    The above image displays the search results page, which lists all universities and courses with similar names to the query.
+
     
-6. Course Search - Course Page that shows all reviews in that course
+6. Course Search
     ![alt text](./final_images/coursesearchpage.PNG)
+    The above image displays a course page, which lists all reviews under a course. Users can sort the reviews by rating in ascending or descending order. There is also an option to create and submit a new review.
 
-7. University Search - Uni Page that shows all courses in that uni
+
+7. University Search
     ![alt text](./final_images/unisearchpage.PNG)
+    The above image displays a university page, which lists all courses under a university.
 
-8. Create Review - Create your own review form
+
+8. Create Review
     ![alt text](./final_images/createreview.PNG)
+    The above image displays the form for creating and submitting a review.
 
 # APIs
 
@@ -133,13 +144,11 @@ Directs to the login page if user is not logged in; directs to user profile page
 Upon successful logout, redirects to the login page.
 
 /register -> /Client/register.html, /Client/login.html
-Directs to user registration page if user is not logged in or registering; directs to login page upon successful registration.
+Directs to user registration page if user is not logged in and registering; directs to login page upon successful registration.
 
 # Authentication/Authorization
 
-Authentication/Authorization: A final up-to-date description of how users are authenticated and any permissions for specific users (if any) that you used in your application. You should mention how they relate to which UI views are accessible.
-
-Users may register an account through the registration page and be authenticated through the login process. Upon logging in, users will be able to edit reviews for courses they have made.
+Users may register an account through the registration page and be authenticated through the login process. Upon logging in, users will be able to edit reviews for courses they have made. The user's login status affects what view is displayed upon attempting to access the login page or profile page, as the login page is not accessible when currently logged in and the profile page is not accessible when logged out.
 
 # Division of Labor
 
@@ -163,7 +172,6 @@ Division of Labor: A breakdown of the division of labor for each team member —
 
 # Conclusion
 
-Conclusion: A conclusion describing your team’s experience in working on this project. This should include what you learned through the design and implementation process, the difficulties you encountered, what your team would have liked to know before starting the project that would have helped you later, and any other technical hurdles that your team encountered.
-
+Throughout the process of creating CourseCheck, all of us learned valuable lessons about how to delegate and coordinate tasks. In a more technical sense, we learned a lot about the fundamentals of APIs, web security, and more specifically how to utilize Bootstrap and Heroku. We encountered some difficulties deploying to Heroku, given that none of us had previous experience with it, as well as difficulties switching tracks when reworking our code to fit with secure databases rather than dummy data. It would have been useful to know from the start how uneven the pacing would be when implementing different aspects of our application, as we would have been able to organize our time more effectively.
 
 # Rubric
