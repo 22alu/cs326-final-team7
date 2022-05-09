@@ -156,6 +156,7 @@ Division of Labor: A breakdown of the division of labor for each team member —
 
 ### Andy Lu
 
+Worked on html for home page, course search page, and user registration page. Implemented RUD operations and associated functions for editing, deleting, and displaying course reviews from a user profile page. Implemented database table, CRUD operations, and routing functions associated with user registration and authentication.
 
 ### Jeffrey Wong
 

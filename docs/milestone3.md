@@ -19,8 +19,8 @@
 
 # Divison of labor
 
-### Andy LU:
-
+### Andy Lu:
+Implemented database table and CRUD operations involving account registration and authentication. Filled out routing functions involving these CRUD operations. Created registration page.
 
 ### Jeffrey Wong:
 Completed procedures to deploy app on Heroku. Assisted in editing and completing backend of the the website.
