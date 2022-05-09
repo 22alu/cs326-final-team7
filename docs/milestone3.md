@@ -17,7 +17,15 @@
 | userName     | String    | User’s userName          |
 | password 	   | String    | User’s Password          |
 
-# Breakdown of the divison of labor
+# Divison of labor
+
+### Andy LU:
+
+
+### Jeffrey Wong:
+
 
 ### Manay Patel:
 Created and implemented database class to work with CRUD operations on _reviews_. Filled out routing functions to use this database class. Refactored front end to work properly with the newly implemented backend. Added log in authentication to the site.
+
+### Muhammad Shah:

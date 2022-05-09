@@ -154,19 +154,16 @@ Users may register an account through the registration page and be authenticated
 
 Division of Labor: A breakdown of the division of labor for each team member — that is, saying who did what, for the entire project. Remember that everyone is expected to contribute roughly equally to each phase of the project. We expect to see similar numbers and kinds of GitHub commits by each student.
 
-### Manay Patel
-
-
-
 ### Andy Lu
 
 
+### Jeffrey Wong
+
+
+### Manay Patel
+
 
 ### Muhammad Shah
-
-
-
-### Jeffrey Wong
 
 
 
