@@ -161,7 +161,7 @@ Division of Labor: A breakdown of the division of labor for each team member —
 
 
 ### Manay Patel
-
+Organised the team by distributing tasks to be done per milestone. Helped structure out pages on how they have to function. Provided with templates for coding files so it's easier to distribute programming tasks. 
 
 ### Muhammad Shah
 
