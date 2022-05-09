@@ -155,14 +155,13 @@ Users may register an account through the registration page and be authenticated
 Division of Labor: A breakdown of the division of labor for each team member — that is, saying who did what, for the entire project. Remember that everyone is expected to contribute roughly equally to each phase of the project. We expect to see similar numbers and kinds of GitHub commits by each student.
 
 ### Andy Lu
-
 Worked on html for home page, course search page, and user registration page. Implemented RUD operations and associated functions for editing, deleting, and displaying course reviews from a user profile page. Implemented database table, CRUD operations, and routing functions associated with user registration and authentication.
 
 ### Jeffrey Wong
 Implemented front end and back end for the University Search page. Deployed the app on Heroku and assisted in creating the datbase/change routing functions.
 
-
 ### Manay Patel
+Organised the team by distributing tasks to be done per milestone. Helped structure out pages on how they have to function. Provided with templates for coding files so it's easier to distribute programming tasks. Created front end and back end support for course search page. Implemented database class and helped with authentication functionality.
 
 ### Muhammad Shah
 
