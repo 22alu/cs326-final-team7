@@ -129,8 +129,6 @@ All pages contain a search bar to allow users to conduct searches, and a profile
 
 # URL Routes/Mappings
 
-URL Routes/Mappings: A final up-to-date table of all the URL routes that your application supports and a short description of what those routes are used for. You should also indicate any authentication and permissions on those routes.
-
 / -> /index.html
 Directs to main landing page.
 
@@ -152,8 +150,6 @@ Users may register an account through the registration page and be authenticated
 
 # Division of Labor
 
-Division of Labor: A breakdown of the division of labor for each team member — that is, saying who did what, for the entire project. Remember that everyone is expected to contribute roughly equally to each phase of the project. We expect to see similar numbers and kinds of GitHub commits by each student.
-
 ### Andy Lu
 Worked on html for home page, course search page, and user registration page. Implemented RUD operations and associated functions for editing, deleting, and displaying course reviews from a user profile page. Implemented database table, CRUD operations, and routing functions associated with user registration and authentication.
 
@@ -164,7 +160,7 @@ Implemented front end and back end for the University Search page. Deployed the 
 Organised the team by distributing tasks to be done per milestone. Helped structure out pages on how they have to function. Provided with templates for coding files so it's easier to distribute programming tasks. Created front end and back end support for course search page. Implemented database class and helped with authentication functionality.
 
 ### Muhammad Shah
-
+Created user profile page using html and css and hand drew all the wireframes. Also Created api calls to when someone makes a search using the searchbar which redirects to a new page and lists out the results obtained from the server on the search querry.
 
 
 # Conclusion
@@ -172,3 +168,12 @@ Organised the team by distributing tasks to be done per milestone. Helped struct
 Throughout the process of creating CourseCheck, all of us learned valuable lessons about how to delegate and coordinate tasks. In a more technical sense, we learned a lot about the fundamentals of APIs, web security, and more specifically how to utilize Bootstrap and Heroku. We encountered some difficulties deploying to Heroku, given that none of us had previous experience with it, as well as difficulties switching tracks when reworking our code to fit with secure databases rather than dummy data. It would have been useful to know from the start how uneven the pacing would be when implementing different aspects of our application, as we would have been able to organize our time more effectively.
 
 # Rubric
+
+1. Working front end without major visible bugs: 15%
+2. Course Search working correctly and displaying right results: 20%
+3. University Search working correctly and displaying right results: 20%
+4. User login/signup and logout working correctly: 10%
+5. User's have option to to edit and delete their reviews once they log in: 10%
+6. Anyone can create reviews and they are added appropriately: 10%
+7. Buttons and hyperlinks functioning correctly: 5%
+8. Any changes created on the data is reflected on the site (for example deleting or editing a user's review gets updated on the review page): 10%
