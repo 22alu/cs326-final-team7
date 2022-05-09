@@ -165,6 +165,7 @@ Implemented front end and back end for the University Search page. Deployed the 
 
 ### Muhammad Shah
 
+Created user profile page using html and css and hand drew all the wireframes. Also Created api calls to when someone makes a search using the searchbar which redirects to a new page and lists out the results obtained from the server on the search querry.
 
 
 # Conclusion
