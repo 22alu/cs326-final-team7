@@ -78,14 +78,14 @@ export async function updateUser(username, newuser, email, password) {
     return data;
 }
 
-export async function deleteReview(username, review) {
+export async function deleteReview(id) {
   try {
-      const response = await fetch(`/deleteReview?userName=${username}`, {
+      const response = await fetch(`/deleteReview`, {
           method: "DELETE",
           headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(review),
+        body: JSON.stringify({'id': id})
       });
       const data = await response.json();
       return data;
@@ -94,14 +94,14 @@ export async function deleteReview(username, review) {
   }
 }
 
-export async function updateReviews(userName, newReviews) {
+export async function updateReviews(id, desc) {
     //to be implemented - substitute fake data for now
-    const response = await fetch(`/updateReviews?userName=${userName}`, {
+    const response = await fetch(`/updateReviews`, {
       method: "PUT",
       headers: {
           "Content-Type": "application/json",
       },
-      body: JSON.stringify(newReviews),
+      body: JSON.stringify({'id': id, 'desc': desc}),
   });
   const data = await response.json();
   return data;

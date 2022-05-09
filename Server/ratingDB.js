@@ -45,7 +45,7 @@ export class RatingsTable {
 
       create table if not exists users (
         "userName" varchar(30) primary key,
-        "password" varchar(30),
+        "password" varchar(30)
       );
     `;
     const res = await this.client.query(queryText);
@@ -75,7 +75,7 @@ export class RatingsTable {
   async attemptLogin(username) {
     const queryText = 'SELECT password FROM users WHERE "userName" = $1';
     const res = await this.client.query(queryText, [username]);
-    return res.rows;
+    return res.rows[0].password;
   }
 
   // Read uni names that contains query
@@ -124,7 +124,7 @@ export class RatingsTable {
   // Update Description of a rating
   async updateRating(ratingID, desc) {
     const queryText =
-      'UPDATE ratings description = ($1) WHERE ("id" LIKE ($2))';
+      'UPDATE ratings SET description = ($1) WHERE ("id" = ($2))';
     const res = await this.client.query(queryText, [desc, ratingID]);
     return res.rows;
   }
@@ -132,7 +132,7 @@ export class RatingsTable {
   // Delete a rating from user
   async deleteRating(ratingID) {
     const queryText =
-      'DELETE FROM ratings WHERE ("id"=($1))';
+      'DELETE FROM ratings WHERE ("id" = ($1))';
     const res = await this.client.query(queryText, [ratingID]);
     return res;
   }

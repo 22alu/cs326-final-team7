@@ -1,7 +1,14 @@
 import express, { response } from "express";
-import { RatingsTable } from "./ratingDB";
 import logger from "morgan";
 import { RatingsTable } from "./ratingDB.js";
+import expressSession from 'express-session';
+import users from './users.js';
+import auth from './auth.js';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(dirname(__filename));
 
 const app = express();
 const port = process.env.PORT || 80;
@@ -11,10 +18,71 @@ const dburl = process.env.DATABASE_URL;
 const db = new RatingsTable(dburl);
 await db.connect();
 
+// Session configuration
+const sessionConfig = {
+    // set this encryption key in Heroku config (never in GitHub)!
+    secret: process.env.SECRET || 'SECRET',
+    resave: false,
+    saveUninitialized: false,
+  };
+
+app.use(expressSession(sessionConfig));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/client", express.static("Client"));
+auth.configure(app);
+
+function checkLoggedIn(req, res, next) {
+    if (req.isAuthenticated()) {
+      // If we are authenticated, run the next route.
+      next();
+    } else {
+      // Otherwise, redirect to the login page.
+      res.redirect('Client/login.html');
+    }
+}
+
+// Handle post data from the login.html form.
+app.post(
+    '/login',
+    auth.authenticate('local', {
+      // use username/password authentication
+      successRedirect: '/profilepage', // when we login, go to /private
+      failureRedirect: 'Client/login.html', // otherwise, back to login
+    })
+);
+
+// Private data
+app.get(
+    '/profilepage',
+    checkLoggedIn, // If we are logged in (notice the comma!)...
+    (req, res) => {
+      // Go to the user's page.
+      res.redirect('Client/profilepage.html?user=' + req.user);
+    }
+);
+
+// Handle logging out (takes us back to the login page).
+app.get('/logout', (req, res) => {
+    req.logout(); // Logs us out!
+    res.redirect('Client/login.html'); // back to login
+});
+
+app.post('/register', async (req, res) => {
+    const { username, password } = req.body;
+    const ret = await users.addUser(username, password);
+    if (ret) {
+      res.redirect('/Client/login.html');
+    } else {
+      res.redirect('Client/register.html');
+    }
+});
+  
+// Register URL
+app.get('/register', (req, res) =>
+    res.sendFile('Client/register.html', { root: __dirname })
+);
 
 app.get('/courseRatings', async (request, response) => {
     const options = request.query;
@@ -48,36 +116,35 @@ app.get('/uniRatings', async (request, response) => {
 });
 
 app.get('/userRatings', async (request, response) => {
-    const options = request.body;
+    const options = request.query;
     const data = await db.ratingUnderUser(options.username);
     response.json(data);
 });
 
-app.put('/updateUser', async (request, response) => {
-    const options = request.body;
-    console.log("Updated User Profile");
-    response.json("Updated User Profile");
-});
-
 app.put('/updateReviews', async (request, response) => {
-    const options = request.body;
-    console.log("Updated User Reviews");
+    const {id, desc} = request.body;
+    console.log(id, desc);
+    await db.updateRating(id, desc);
     response.json("Updated User Reviews");
 });
 
 app.get('/unis', async (request, response) => {
     const options = request.query;
     const data = await db.uniStartingWith(options.query);
+    let retSet = new Set();
     let retList = [];
-    data.forEach(e => retList.push(e.uniName));
+    data.forEach(e => retSet.add(e.uniName));
+    retSet.forEach(e => retList.push(e));
     response.json(retList);
 });
 
 app.get('/courses', async (request, response) => {
     const options = request.query;
     const data = await db.courseIDStartingWith(options.courseName);
+    let retSet = new Set();
     let retList = [];
-    data.forEach(e => retList.push(e.courseID));
+    data.forEach(e => retSet.add(e.courseID));
+    retSet.forEach(e => retList.push(e));
     response.json(retList);
 });
 
@@ -97,8 +164,8 @@ app.post('/createReview', async (request, response) => {
 });
 
 app.delete('/deleteReview', async (request, response) => {
-    const options = request.body;
-    console.log("Deleted the review");
+    const {id} = request.body;
+    await db.deleteRating(id);
     response.json("Deleted the review");
 });
 
